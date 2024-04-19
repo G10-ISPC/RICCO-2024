@@ -60,12 +60,16 @@ A las mencionadas en el Sprint 1 sumamos:
 
 
 ## Integrantes
-+ Juarez Manescotto, Micaela Ines 
-+ Cruz, Laura Patricia 
-+ Figueroa, Félix Antonio 
-+ Cos, Mariana
 + Arévalo, Carla Elizabeth
 + Aricoma, Delfina
++ Cevasco, Ernesto Agustín
++ Cos, Mariana
++ Cruz, Laura Patricia 
++ Figueroa, Félix Antonio
++ Gulle, Melisa
++ Juarez Manescotto, Micaela Inés
++ Ponce, Dalma Florencia del Valle
+
 
 ![Trabajo en equipo.](https://img.freepik.com/vetores-gratis/tecnologia-hackathon-com-designer-grafico-e-desenvolvedores-de-programadores-de-computador_88138-900.jpg)
 
