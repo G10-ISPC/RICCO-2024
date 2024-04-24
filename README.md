@@ -15,15 +15,15 @@ RICCO 2024 está diseñado para ofrecer una experiencia de compra fácil y segur
 
 ## Tecnologías Utilizadas
 ### Frontend
-- **Angular**: Marco de trabajo que facilita la creación de interfaces de usuario dinámicas y escalables.
 - **HTML**: Estructura de las páginas web.
 - **CSS**: Estilos para mejorar la apariencia.
 - **Bootstrap**: Framework de CSS para diseño responsive y componentes predefinidos.
 - **JavaScript**: Lenguaje de programación para interacciones dinámicas en el sitio web.
+<!---- **Angular**: Marco de trabajo que facilita la creación de interfaces de usuario dinámicas y escalables.-->
 
 ### Backend
 - **Python**: Lenguaje de programación utilizado para la lógica del servidor.
-- **Django**: Framework de Python que facilita la creación rápida de sitios web seguros y mantenibles.
+<!--- **Django**: Framework de Python que facilita la creación rápida de sitios web seguros y mantenibles.-->
 
 ## Capturas de Pantalla
 <!--![web ricco](https://github.com/G10-ISPC/RICCO-2024/assets/106714820/6b2521dc-cef1-4ff4-a73e-fe14d453a189) -->
