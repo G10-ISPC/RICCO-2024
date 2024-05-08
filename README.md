@@ -41,11 +41,13 @@ RICCO 2024 está diseñado para ofrecer una experiencia de compra fácil y segur
 2. **Gestionar inventario**: Actualiza el stock de los productos disponibles.
 3. **Procesar pedidos**: Revisa y gestiona los pedidos realizados por los clientes.
 
+
 ## Contacto
 Para cualquier consulta, duda o colaboración, puedes contactarme a través de los siguientes medios:
 - **Email**: contacto@ricco.com
 - **Twitter**: @ricco_burgers
 - **Sitio web**: [RICCO 2024](https://g10-ispc.github.io/IntegradorFullStack-G10/ricco/frontend/)
+
 
 ## Integrantes
 - Arévalo, Carla Elizabeth
