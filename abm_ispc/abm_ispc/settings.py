@@ -24,7 +24,7 @@ DATABASES = {
 'ENGINE': 'django.db.backends.mysql',
 'NAME': 'abm_ispc',
 'USER': 'root',
-'PASSWORD': '',
+'PASSWORD': '123456',
 'HOST': 'localhost',
 'PORT': '3306',
 'OPTIONS': {
@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'MiprimerABM'
 ]
 
 MIDDLEWARE = [
