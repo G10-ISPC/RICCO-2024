@@ -21,3 +21,30 @@ describe('AuthComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+
+@Component({
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
+})
+export class LoginComponent {
+  username: string = '';
+  password: string = '';
+  loginError: boolean = false;
+
+  constructor(private router: Router) {}
+
+  login() {
+    // Aquí puedes implementar la lógica de autenticación
+    if (this.username === 'usuario' && this.password === 'contraseña') {
+      // Autenticación exitosa, redirige a otra página
+      this.router.navigate(['/dashboard']);
+    } else {
+      // Muestra un mensaje de error
+      this.loginError = true;
+    }
+  }
+}
