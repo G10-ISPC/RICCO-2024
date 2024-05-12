@@ -2,12 +2,13 @@ import { Component } from '@angular/core';
 import { CommonModule} from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './shared/header/header.component';
+import {NavComponent} from './shared/nav/nav.component';
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [ CommonModule, RouterOutlet, HeaderComponent],
+  imports: [ CommonModule, RouterOutlet, HeaderComponent, NavComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
