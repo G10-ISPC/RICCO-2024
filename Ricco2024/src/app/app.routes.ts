@@ -2,7 +2,8 @@ import { Routes } from '@angular/router';
 import { ProductosComponent } from './pages/productos/productos.component';
 import { HomeComponent } from './pages/home/home.component';
 import { NosotrosComponent } from './pages/nosotros/nosotros.component';
-import { ContactoComponent } from './pages/contacto/contacto.component';import { CarritoComponent } from './pages/carrito/carrito.component';
+import { ContactoComponent } from './pages/contacto/contacto.component';
+import { CarritoComponent } from './pages/carrito/carrito.component';
 
 
 
