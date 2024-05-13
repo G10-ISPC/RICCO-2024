@@ -6,6 +6,7 @@ import { ContactoComponent } from './pages/contacto/contacto.component';
 import { CarritoComponent } from './pages/carrito/carrito.component';
 
 
+
 import { AuthComponent } from './pages/auth/auth.component';
 import { LoginComponent } from './pages/auth/auth_login/login/login.component';
 
