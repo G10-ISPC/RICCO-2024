@@ -7,9 +7,11 @@ import { CarritoComponent } from './pages/carrito/carrito.component';
 
 
 
+
 export const routes: Routes = [
     {path: 'productos', component: ProductosComponent},
     {path: 'home', component: HomeComponent},
     {path: 'nosotros', component: NosotrosComponent},
+    {path: 'contacto', component: ContactoComponent},
     {path: 'carrito', component: CarritoComponent},
 ];
