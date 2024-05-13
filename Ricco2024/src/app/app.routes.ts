@@ -7,14 +7,16 @@ import { CarritoComponent } from './pages/carrito/carrito.component';
 
 
 import { AuthComponent } from './pages/auth/auth.component';
+import { LoginComponent } from './pages/auth/auth_login/login/login.component';
 
 
 export const routes: Routes = [
-    {path: "", redirectTo: "/home", pathMatch: "full" },
-    {path: 'productos', component: ProductosComponent},
-    {path: 'home', component: HomeComponent},
-    {path: 'nosotros', component: NosotrosComponent},
-    {path: 'contacto', component: ContactoComponent},
-    {path: 'carrito', component: CarritoComponent},
-    {path: 'auth', component: AuthComponent}
+    { path: "", redirectTo: "/home", pathMatch: "full" },
+    { path: "login", component: LoginComponent },
+    { path: 'productos', component: ProductosComponent },
+    { path: 'home', component: HomeComponent },
+    { path: 'nosotros', component: NosotrosComponent },
+    { path: 'contacto', component: ContactoComponent },
+    { path: 'carrito', component: CarritoComponent },
+    { path: 'auth', component: AuthComponent }
 ];
