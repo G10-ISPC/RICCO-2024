@@ -59,6 +59,9 @@
       </nav>
     </header>
     <main>
+      <a href="./carrito.html" class="cartButton" target="blank">
+        <img  class="cartIcon" src="../assets/img/cart1.png" ></img>
+      </a>
       <section>
         <div class="container__card">
          <div id="administrador" style="display:none" ><!--" una vez definida la validacion de roles-->
@@ -74,16 +77,17 @@
             </div>
             </a>
         </div>
-    
+
           <div class="card__father">
-            <div class="card">
+            <div class="card" id="product1">
               <div
-                class="card__front"
+                class="card__front" 
                 style="background-image: url(../assets/img/bur1.jpg)"
               >
                 <div class="bg"></div>
                 <div class="body__card_front">
                   <h2>KING KONG BURGER</h2>
+                  
                 </div>
               </div>
               <div class="card__back">
@@ -94,17 +98,19 @@
                     panceta crocante
                   </p>
                   <p class="price">$4500</p>
-                  <a class="button" href="#" role="button" target="blank"
+                  <a id="buy-button-product1" class="button buy-button" data-product="product1" role="button" target="blank" 
                     >Comprar</a
                   >
+                  
                 </div>
               </div>
             </div>
           </div>
+
           <div class="card__father">
-            <div class="card">
+            <div class="card" id="product2" >
               <div
-                class="card__front"
+                class="card__front" 
                 style="background-image: url(../assets/img/bur2.jpg)"
               >
                 <div class="bg"></div>
@@ -120,7 +126,7 @@
                     asada
                   </p>
                   <p class="price">$2450</p>
-                  <a class="button" href="#" role="button" target="blank"
+                  <a id="buy-button-product2" class="button buy-button" data-product="product2" href="./carrito.html"  role="button" target="blank"
                     >Comprar</a
                   >
                 </div>
@@ -128,7 +134,7 @@
             </div>
           </div>
           <div class="card__father">
-            <div class="card">
+            <div class="card" id="product3">
               <div
                 class="card__front"
                 style="background-image: url(../assets/img/bur3.jpg)"
@@ -145,7 +151,7 @@
                     panceta crocante y huevo a la plancha
                   </p>
                   <p class="price">$3900</p>
-                  <a class="button" href="#" role="button" target="blank"
+                  <a id="buy-button-product3" class="button buy-button" data-product="product3"  role="button" target="blank"
                     >Comprar</a
                   >
                 </div>
@@ -153,7 +159,7 @@
             </div>
           </div>
           <div class="card__father">
-            <div class="card">
+            <div class="card" id="product4">
               <div
                 class="card__front"
                 style="background-image: url(../assets/img/bur4.jpg)"
@@ -171,15 +177,15 @@
                     Rúcula
                   </p>
                   <p class="price">$4100</p>
-                  <a class="button" href="#" role="button" target="blank"
-                    >Comprar</a
+                  <a id="buy-button-product4" class="button buy-button" data-product="product4"  role="button" target="blank"
+                  >Comprar</a
                   >
                 </div>
               </div>
             </div>
           </div>
           <div class="card__father">
-            <div class="card">
+            <div class="card" id="product5">
               <div
                 class="card__front"
                 style="background-image: url(../assets/img/bur5.jpg)"
@@ -196,15 +202,15 @@
                     Aros de cebolla fritos. Panceta crocante. Guacamole
                   </p>
                   <p class="price">$3250</p>
-                  <a class="button" href="#" role="button" target="blank"
-                    >Comprar</a
+                  <a id="buy-button-product5" class="button buy-button" data-product="product5"  role="button" target="blank"
+                  >Comprar</a
                   >
                 </div>
               </div>
             </div>
           </div>
           <div class="card__father">
-            <div class="card">
+            <div class="card" id="product6">
               <div
                 class="card__front"
                 style="background-image: url(../assets/img/bur6.jpg)"
@@ -221,15 +227,15 @@
                     frutos secos. Cebolla al malbec
                   </p>
                   <p class="price">$2780</p>
-                  <a class="button" href="#" role="button" target="blank"
-                    >Comprar</a
+                  <a id="buy-button-product6" class="button buy-button" data-product="product6"  role="button" target="blank"
+                  >Comprar</a
                   >
                 </div>
               </div>
             </div>
           </div>
           <div class="card__father">
-            <div class="card">
+            <div class="card" id="product7">
               <div
                 class="card__front"
                 style="background-image: url(../assets/img/bur7.jpg)"
@@ -246,15 +252,15 @@
                     cheddar. Panceta. Cebolla
                   </p>
                   <p class="price">$4450</p>
-                  <a class="button" href="#" role="button" target="blank"
-                    >Comprar</a
+                  <a id="buy-button-product7" class="button buy-button" data-product="product7"  role="button" target="blank"
+                  >Comprar</a
                   >
                 </div>
               </div>
             </div>
           </div>
           <div class="card__father">
-            <div class="card">
+            <div class="card" id="product8">
               <div
                 class="card__front"
                 style="background-image: url(../assets/img/bur8.jpg)"
@@ -271,8 +277,8 @@
                     Queso dambo fundido. Cebolla caramelizada. Panceta crocante
                   </p>
                   <p class="price">$3450</p>
-                  <a class="button" href="#" role="button" target="blank"
-                    >Comprar</a
+                  <a id="buy-button-product8" class="button buy-button" data-product="product8"  role="button" target="blank"
+                  >Comprar</a
                   >
                 </div>
               </div>
@@ -315,6 +321,10 @@
       integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
       crossorigin="anonymous"
     ></script>
+
+    
     <script src="../assets/js/adm.js"></script>
+    
+    <script src="../assets/js/carrito.js"></script>
   </body>
 </html>
