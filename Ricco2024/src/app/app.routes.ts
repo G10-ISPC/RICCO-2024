@@ -6,7 +6,8 @@ import { NosotrosComponent } from './pages/nosotros/nosotros.component';
 
 
 export const routes: Routes = [
-    {path: 'productos', component: ProductosComponent},
-    {path: 'home', component: HomeComponent},
-    {path: 'nosotros', component: NosotrosComponent},
+    { path: "", redirectTo: "/home", pathMatch: "full" },
+    { path: 'productos', component: ProductosComponent },
+    { path: 'home', component: HomeComponent },
+    { path: 'nosotros', component: NosotrosComponent },
 ];
