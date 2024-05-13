@@ -124,3 +124,49 @@ class Detalle(models.Model):
 
     def __str__(self):
         return f"{self.cantidad}, {self.precio_calculado}"
+    
+class Permiso(models.Model):
+    id_permiso = models.AutoField(primary_key=True)
+    nombre_permiso = models.CharField(max_length=100, blank=False)
+    descripcion = models.CharField(max_length=1000, blank=False)
+   
+    class Meta:
+        db_table = 'Permiso'
+        verbose_name = 'Permiso'
+        verbose_name_plural = 'Permisos'
+        
+    def __str__(self):
+        return str(self.nombre_permiso)
+
+
+class Rol_Permiso(models.Model):
+    id_rol_permiso = models.AutoField(primary_key=True)
+    id_permiso = models.ForeignKey(Permiso, to_field='id_permiso', on_delete=models.CASCADE)
+    id_rol = models.ForeignKey(Rol, to_field='id_rol', on_delete=models.CASCADE)
+
+    # id_rol = models.ForeignKey(rol, on_field='id_rol', on_delete=models.CASCADE)
+
+    class Meta:
+        db_table = 'Rol_Permiso'
+        verbose_name = 'Rol_Permiso'
+        verbose_name_plural = 'Rol_Permisos'
+        
+    def __str__(self):
+        return str(self.id_rol_permiso)
+    
+
+class Pedido(models.Model):
+    id_pedido = models.AutoField(primary_key=True)
+    fecha_pedido = models.DateField()
+    estado = models.CharField(max_length=50)
+    id_usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+
+    # id_usuario = models.ForeignKey(Pedido, on_delete=models.CASCADE)
+    
+    class Meta:
+        db_table = 'Pedido'
+        verbose_name = 'Pedido'
+        verbose_name_plural = 'Pedidos'
+        
+    def __str__(self):
+        return str(self.id_pedido)
