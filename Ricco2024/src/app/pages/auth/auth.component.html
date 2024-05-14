@@ -1,0 +1,64 @@
+<main id="bg">
+    <br><br><br><br>
+    <br>
+    <div>
+        <form [formGroup]="form" (ngSubmit)="onEnviar($event)"  class="container my-6 justify-content-center col-8 border caja2 ">
+            <br>
+            <br>
+            <!--<p class="text-dark">REGISTRATE</p>-->
+            <div class="caja-titulo">
+                <h3>Registrate</h3>
+                <br>
+                <br>
+
+            </div>
+            <!--GRUPO NOMBRE/APELLIDO-->
+            <div class="d-flex mb-3">
+                <label for="nombre"></label>
+                <input type="text" formControlName="nombre" id="nombre" class="form-control" placeholder="Nombre" required maxlength="30">
+                <label for="apellido"></label>
+                <input type="text" formControlName="apellido" id="apellido" class="form-control ms-1" placeholder="Apellido" required
+                    maxlength="30">
+            </div>
+            <!--GRUPO EMAIL/DIRECCION-->
+            <div class="d-flex mb-3">
+                <label for="correo"></label>
+                <input type="email" formControlName="email" id="correo" class="form-control" placeholder="Email" required>
+                
+                <label for="direccion"></label>
+                <input type="text" formControlName="direccion"  id="direccion" class="form-control ms-1" placeholder="Dirección" required>
+            </div>
+            <!--GRUPO BARRIO/LOCALIDAD-->
+            <div class="d-flex mb-3">
+                <label for="barrio"></label>
+                <input type="text" formControlName="barrio" id="barrio" class="form-control" placeholder="Barrio" required>
+                <label for="localidad"></label>
+                <input type="text" formControlName="localidad"  id="localidad" class="form-control ms-1" placeholder="Localidad">
+            </div>
+            <!--GRUPO TELEFONO/CP-->
+            <div class="d-flex mb-3">
+                <label for="telefono"></label>
+                <input type="tel" formControlName="telefono" id="telefono" class="form-control" placeholder="Teléfono" required>
+                <label for="cp"></label>
+                <input type="text" formControlName="cp" id="cp" class="form-control ms-1" placeholder="CP" required>
+            </div>
+            <!--GRUPO CONTRASEÑAS-->
+            <div class="d-flex mb-3">
+                <label for="password"></label>
+                <input type="password" formControlName="password" id="password" class="form-control" placeholder="Contraseña" required>
+                <label for="password2"></label>
+                <input type="password" formControlName="password2"id="password2" name="contrasenia2" class="form-control ms-1"
+                    placeholder="Confirmar Contraseña" required>
+            </div>
+
+
+            <button type="submit" class="btn input-submit w-100 " value="registar" id="submitButton"
+                onclick="event">Enviar</button>
+                <br><br>
+            <a class="enlace" routerLink="/login" [href]="'/login'">¿Ya tenés una cuenta? <b> Iniciá
+                    sesión</b></a>
+            <p id="mensajeError" style="color:#F12C3E; font-size: 13px;"></p> <!--agregue-->
+        </form>
+    </div>
+
+</main>
