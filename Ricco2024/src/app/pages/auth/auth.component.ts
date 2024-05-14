@@ -31,8 +31,4 @@ export class AuthComponent {
     console.log(this.form.value)
   }
 
-
-
-
-
 }
