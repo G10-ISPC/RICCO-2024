@@ -1,27 +1,31 @@
 import { Component } from '@angular/core';
-import { FormsModule, NgModel } from '@angular/forms';
+import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule],
+  imports: [ReactiveFormsModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
 
-  email = "";
-  password = "";
+  form!: FormGroup;
+  constructor(private formBuilder: FormBuilder) {
+    this.form = this.formBuilder.group(
+      {
+        
+        email: ['', [Validators.required, Validators.email], []],
 
-  onEnviar(): void {/*
-      if (this.email === "admin@gmail.com" && this.password === "admin123") {
-  
-        alert("¡Bienvenido!");
-      } else if (this.email != "admin@gmail.com") {
-        alert("Email incorrecto");
-  
-      } else if (this.password != "admin123")*/
-
+        password: ['', [Validators.required], []],
+        
+      }
+    )
   }
+
+  onEnviar(event: Event) {
+    console.log(this.form.value)
+  }
+
 
 }

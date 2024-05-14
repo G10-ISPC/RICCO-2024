@@ -20,30 +20,30 @@
   <div class="contenedor">
     <div class="caja" id="form">
 
-      <div class="contenedor-ingreso" id="ingreso">
+      <form [formGroup]="form" (ngSubmit)="onEnviar($event)" class="contenedor-ingreso" id="ingreso">
         <div class="caja-titulo">
           <h3>Bienvenido</h3>
           <small>Que bueno verte otra vez!!</small>
         </div>
         <div class="grupo-inputs">
           <div class="campo-input">
-            <input type="text" [(ngModel)]="email" class="caja-input" id="logEmail" required>
+            <input type="text" formControlName="email" class="caja-input" id="logEmail" required>
             <label for="logEmail">E-mail</label>
           </div>
           <div class="campo-input">
-            <input type="password" [(ngModel)]="password" class="caja-input" id="contrasenaIngreso" required>
+            <input type="password" formControlName="password"class="caja-input" id="contrasenaIngreso" required>
             <label for="contrasenaIngreso">Contraseña</label>
 
           </div>
           <p id="mensajeError" style="color:#F12C3E; font-size: 13px;"></p>
 
           <div class="campo-input">
-            <input (click)="onEnviar()" type="submit" class="input-submit" value="Ingresar" id="submitButton">
+            <input type="submit" class="input-submit" value="Ingresar" id="submitButton">
           </div>
-          <a class="enlace" href="">¿No tenés cuenta aún? <b> Crear cuenta</b></a>
+          <a class="enlace" href="/Ricco2024/src/app/pages/auth/auth.component.html">¿No tenés cuenta aún? <b> Crear cuenta</b></a>
         </div>
 
-      </div>
+      </form>
 
 
     </div>
