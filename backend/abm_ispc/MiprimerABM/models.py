@@ -2,7 +2,7 @@ from django.db import models
 
 class Localidad(models.Model):
     id_localidad = models.AutoField(primary_key=True)
-    nombre_localidad = models.CharField(max_length=50, blank=False)
+    nombre_localidad = models.CharField(max_length=50, blank=False, default='Desconocido')
     cod_postal = models.IntegerField(blank=False, default=2000)
 
     class Meta:
@@ -18,7 +18,7 @@ class Localidad(models.Model):
     
 class Barrio(models.Model):
     id_barrio = models.AutoField(primary_key=True)
-    nombre_barrio = models.CharField(max_length=50, blank=False)
+    nombre_barrio = models.CharField(max_length=50, blank=False, default='Desconocido')
     id_localidad = models.ForeignKey(Localidad, to_field='id_localidad', on_delete=models.CASCADE) 
 
     class Meta:
@@ -34,7 +34,7 @@ class Barrio(models.Model):
     
 class Rol(models.Model):
     id_rol = models.AutoField(primary_key=True)
-    nombre_rol = models.CharField(max_length=50, blank=False)
+    nombre_rol = models.CharField(max_length=50, blank=False, default='Desconocido')
    
     class Meta:
         db_table = 'rol'
@@ -49,9 +49,9 @@ class Rol(models.Model):
     
 class Producto(models.Model):  
     id_producto = models.AutoField(primary_key=True)
-    nombre_producto = models.CharField(max_length=100, blank=False)
-    descripcion = models.TextField(max_length=1000, blank=False)
-    precio = models.DecimalField(max_digits=10, decimal_places=2, blank=False)
+    nombre_producto = models.CharField(max_length=100, blank=False, default='nombre por defecto')
+    descripcion = models.TextField(blank=False, max_length=255, default='valor por defecto')
+    precio = models.DecimalField(max_digits=10, decimal_places=2, blank=False, default=0.0)
 
     class Meta:
         db_table = 'producto'
@@ -63,8 +63,8 @@ class Producto(models.Model):
 
 class Direccion(models.Model):  
     id_direccion = models.AutoField(primary_key=True)
-    calle = models.CharField(max_length=100, blank=False)
-    numero = models.DecimalField(max_digits=10, decimal_places=2, blank=False)
+    calle = models.CharField(max_length=100, blank=False, default='Desconocido')
+    numero = models.DecimalField(max_digits=10, decimal_places=2, blank=False, default=0.0)
     id_barrio = models.ForeignKey(Barrio, to_field='id_barrio', on_delete=models.CASCADE)
 
     class Meta:
@@ -78,14 +78,14 @@ class Direccion(models.Model):
 
     
 class Usuario(models.Model):
-    id_usuario = models.AutoField(primary_key=True)    
-    apellido = models.CharField(max_length=50)
-    nombre = models.CharField(max_length=50)
-    email = models.CharField(max_length=50)
-    telefono = models.CharField(max_length=50) 
-    clave_usuario = models.CharField(max_length=50)  
+    id_usuario = models.AutoField(primary_key=True)
+    apellido = models.CharField(max_length=50, blank=False, default='Apellido')  # Agregar un valor predeterminado
+    nombre = models.CharField(max_length=50, blank=False, default='Nombre')  # Agregar un valor predeterminado
+    email = models.CharField(max_length=50, blank=False, default='email@example.com')  # Agregar un valor predeterminado
+    telefono = models.CharField(max_length=50, blank=False, default='123456789')  # Agregar un valor predeterminado
+    clave_usuario = models.CharField(max_length=50, blank=False, default='clave')  # Agregar un valor predeterminado
     direccion = models.ForeignKey(Direccion, to_field='id_direccion', on_delete=models.CASCADE)
-    id_rol = models.ForeignKey(Rol, to_field='id_rol', on_delete=models.CASCADE) 
+    id_rol = models.ForeignKey(Rol, to_field='id_rol', on_delete=models.CASCADE)
 
     class Meta:
         db_table = 'usuario'
@@ -97,9 +97,9 @@ class Usuario(models.Model):
 
 class Compra(models.Model):  
     id_compra = models.AutoField(primary_key=True)
-    fecha = models.DateField()
-    descripcion = models.TextField(max_length=1000, blank=False)
-    precio_total = models.DecimalField(max_digits=10, decimal_places=2, blank=False)
+    fecha = models.DateField(blank=False, default='2024-01-01')
+    descripcion = models.TextField(max_length=1000, blank=False, default='Descripción de la compra')
+    precio_total = models.DecimalField(max_digits=10, decimal_places=2, blank=False, default=0.0)
     id_usuario = models.ForeignKey(Usuario, to_field='id_usuario', on_delete=models.CASCADE)
 
     class Meta:
@@ -112,8 +112,8 @@ class Compra(models.Model):
 
 class Detalle(models.Model):  
     id_detalle = models.AutoField(primary_key=True)
-    cantidad = models.IntegerField()
-    precio_calculado = models.DecimalField(max_digits=10, decimal_places=2, blank=False)
+    cantidad = models.IntegerField(blank=False, default=1)
+    precio_calculado = models.DecimalField(max_digits=10, decimal_places=2, blank=False, default=0.0)
     id_producto = models.ForeignKey(Producto, to_field='id_producto', on_delete=models.CASCADE)
     id_compra = models.ForeignKey(Compra, to_field='id_compra', on_delete=models.CASCADE)
     
@@ -127,8 +127,8 @@ class Detalle(models.Model):
     
 class Permiso(models.Model):
     id_permiso = models.AutoField(primary_key=True)
-    nombre_permiso = models.CharField(max_length=100, blank=False)
-    descripcion = models.CharField(max_length=1000, blank=False)
+    nombre_permiso = models.CharField(max_length=100, blank=False, default='Permiso')
+    descripcion = models.CharField(max_length=1000, blank=False, default='Descripción del permiso')
    
     class Meta:
         db_table = 'Permiso'
@@ -157,8 +157,8 @@ class Rol_Permiso(models.Model):
 
 class Pedido(models.Model):
     id_pedido = models.AutoField(primary_key=True)
-    fecha_pedido = models.DateField()
-    estado = models.CharField(max_length=50)
+    fecha_pedido = models.DateField(blank=False, default='2024-01-01')
+    estado = models.CharField(max_length=50, blank=False, default='Pendiente')
     id_usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
 
     # id_usuario = models.ForeignKey(Pedido, on_delete=models.CASCADE)
