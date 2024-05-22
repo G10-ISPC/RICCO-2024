@@ -9,6 +9,7 @@ import { CarritoComponent } from './carrito/carrito.component';
 
 import { RegistroComponent } from './registro/registro.component';
 import { LoginComponent } from './login/login.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 
 export const routes: Routes = [
@@ -20,5 +21,6 @@ export const routes: Routes = [
     { path: 'contacto', component: ContactoComponent },
     { path: 'carrito', component: CarritoComponent },
     { path: 'registro', component: RegistroComponent },
+    { path: 'dashboard', component: DashboardComponent }
 
 ];
