@@ -2,10 +2,9 @@
     <br><br><br><br>
     <br>
     <div>
-        <form [formGroup]="form" (ngSubmit)="onEnviar($event)"  class="container my-6 justify-content-center col-8 border caja2 ">
+        <form [formGroup]="formRegister"   class="container my-6 justify-content-center col-8 border caja2 ">
             <br>
             <br>
-            <!--<p class="text-dark">REGISTRATE</p>-->
             <div class="caja-titulo">
                 <h3>Registrate</h3>
                 <br>
@@ -13,13 +12,31 @@
 
             </div>
             <!--GRUPO NOMBRE/APELLIDO-->
-            <div class="d-flex mb-3">
-                <label for="nombre"></label>
-                <input type="text" formControlName="nombre" id="nombre" class="form-control" placeholder="Nombre" required maxlength="30">
-                <label for="apellido"></label>
-                <input type="text" formControlName="apellido" id="apellido" class="form-control ms-1" placeholder="Apellido" required
-                    maxlength="30">
-            </div>
+            <div class="d-flex flex-wrap mb-3">
+                <div class="col-md-6">
+                  <label for="name"></label>
+                  <input type="text" formControlName="name" id="name" class="form-control" placeholder="Nombre" required maxlength="30">
+                  <div class="alert alert-danger mt-2" [hidden]="name.valid ||name.pristine">
+                    <span *ngIf="name.errors?.['required']">
+                        El nombre es obligatorio
+                    </span>
+                    <span *ngIf="name.errors?.['pattern']">
+                        El nombre debe contener solo letras
+                    </span>
+                </div>
+                  </div>
+                
+                <div class="col-md-6">
+                  <label for="surname"></label>
+                  <input type="text" formControlName="surname" id="surname" class="form-control ms-1" placeholder="Apellido" required maxlength="30">
+                  <div class="alert alert-danger mt-2" [hidden]="surname.valid ||surname.pristine">
+                    <span *ngIf="surname.errors?.['required']">El apellido es obligatorio</span>
+                    <span *ngIf="surname.errors?.['pattern']">El apellido debe contener solo letras</span>
+                  </div>
+                </div>
+              </div>
+
+
             <!--GRUPO EMAIL/DIRECCION-->
             <div class="d-flex mb-3">
                 <label for="correo"></label>
