@@ -1,34 +1,51 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl,Validators } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+
+const namePattern = /^[a-zA-Z]*$/;
+const phonePattern = /^[0-9]*$/;
+
 
 @Component({
   selector: 'app-registro',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './registro.component.html',
   styleUrl: './registro.component.css'
 })
+
 export class RegistroComponent {
-  form!: FormGroup;
-  constructor(private formBuilder: FormBuilder) {
-    this.form = this.formBuilder.group(
-      {
-        nombre: ['', [Validators.required], []],
-        apellido: ['', [Validators.required], []],
-        email: ['', [Validators.required, Validators.email], []],
-        direccion: ['', [Validators.required], []],
-        barrio: ['', [Validators.required], []],
-        localidad: ['', [Validators.required], []],
-        cp: ['', [Validators.required], []],
-        telefono: ['', [Validators.required], []],
-        password: ['', [Validators.required], []],
-        password2: ['', [Validators.required], []],
+
+  get name(){
+    return this.formRegister.get('name') as FormControl;
+  }
+  get surname(){
+    return this.formRegister.get('surname') as FormControl;
+  }
+  get email(){
+    return this.formRegister.get('email') as FormControl;
+  }
+  get phone(){
+    return this.formRegister.get('phone') as FormControl;
+  }
+  
+
+
+  formRegister= new FormGroup({
+    'name' : new FormControl('', [Validators.required, Validators.pattern(namePattern)]),
+    'surname' : new FormControl('', [Validators.required, Validators.pattern(namePattern)]),
+    'email': new FormControl('',[Validators.required, Validators.email]),
+    'adress': new FormControl('', Validators.required),
+    'barrio': new FormControl('', Validators.required),
+    'localidad': new FormControl('', Validators.required),
+    'postcode': new FormControl('', Validators.required),
+    'phone': new FormControl('', [Validators.required, Validators.pattern(phonePattern)]),
+    'password': new FormControl('',Validators.required),
+    'password2': new FormControl('', Validators.required), 
+
       }
-    )
+    );
   }
 
-  onEnviar(event: Event) {
-    console.log(this.form.value)
-  }
 
-}

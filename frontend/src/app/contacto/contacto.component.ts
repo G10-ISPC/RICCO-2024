@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { FormGroup, FormControl,Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 
-const namePattern = /^[a-zA-Z\s]*$/;
+const namePattern = /^[a-zA-Z]*$/;
 const phonePattern = /^[0-9]*$/;
 
 @Component({
