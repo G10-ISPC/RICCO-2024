@@ -16,15 +16,11 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 DATABASES = {
-'sqlite': {
-'ENGINE': 'django.db.backends.mysql',
-'NAME': os.path.join(BASE_DIR, 'db.mysql'),
-},
 'default': {
 'ENGINE': 'django.db.backends.mysql',
 'NAME': 'abm_ispc',
 'USER': 'root',
-'PASSWORD': '',
+'PASSWORD': '123456',
 'HOST': 'localhost',
 'PORT': '3306',
 'OPTIONS': {
@@ -58,6 +54,7 @@ INSTALLED_APPS = [
     'MiprimerABM',
      'rest_framework',
      'corsheaders',
+     'knox',
 ]
 
 MIDDLEWARE = [
@@ -96,17 +93,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'abm_ispc.wsgi.application'
-
-
-# Database
-# https://docs.djangoproject.com/en/5.0/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
 
 
 # Password validation
@@ -149,3 +135,11 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+       'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'knox.auth.TokenAuthentication',
+    ]
+}
