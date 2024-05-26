@@ -5,7 +5,7 @@ import { NosotrosComponent } from './nosotros/nosotros.component';
 import { ContactoComponent } from './contacto/contacto.component';
 import { CarritoComponent } from './carrito/carrito.component';
 import { Error404Component } from './error404/error404.component';
-
+import { AdminComponent } from './admin/admin.component';
 import { RegistroComponent } from './registro/registro.component';
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -19,6 +19,7 @@ export const routes: Routes = [
     { path: 'nosotros', component: NosotrosComponent },
     { path: 'contacto', component: ContactoComponent },
     { path: 'carrito', component: CarritoComponent },
+    { path: 'administrador', component: AdminComponent},
     { path: 'registro', component: RegistroComponent },
     { path: 'dashboard', component: DashboardComponent },
     { path: '**', component: Error404Component },
