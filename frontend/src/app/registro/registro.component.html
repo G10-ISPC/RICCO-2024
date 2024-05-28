@@ -1,81 +1,140 @@
 <main id="bg">
-    <br><br><br><br>
+    <br><br>
     <br>
     <div>
-        <form [formGroup]="formRegister"   class="container my-6 justify-content-center col-8 border caja2 ">
-            <br>
-            <br>
-            <div class="caja-titulo">
+        <form [formGroup]="formRegister"   class="container my-3 mx-auto justify-content-center col-9 border caja2 ">
+           
+            <div class="caja-titulo ">
                 <h3>Registrate</h3>
-                <br>
-                <br>
-
+                
             </div>
             <!--GRUPO NOMBRE/APELLIDO-->
-            <div class="d-flex flex-wrap mb-3">
-                <div class="col-md-6">
+            <div class="d-flex flex-row mb-3 form-group  ">
+                <div class="col-md-6 col col-sm-6 col-lg-6">
                   <label for="name"></label>
                   <input type="text" formControlName="name" id="name" class="form-control" placeholder="Nombre" required maxlength="30">
                   <div class="alert alert-danger mt-2" [hidden]="name.valid ||name.pristine">
-                    <span *ngIf="name.errors?.['required']">
-                        El nombre es obligatorio
-                    </span>
-                    <span *ngIf="name.errors?.['pattern']">
-                        El nombre debe contener solo letras
-                    </span>
-                </div>
+                    <div *ngIf="name.errors?.['required']">El nombre es obligatorio.</div>
+                    <div *ngIf="name.errors?.['minlength']">El nombre debe tener al menos 3 caracteres.</div>
+                    <div *ngIf="name.errors?.['pattern']">El nombre debe contener solo letras. </div>
                   </div>
+                </div>
                 
-                <div class="col-md-6">
+                <div class="col-md-6 col col-sm-6 col-lg-6 ">
                   <label for="surname"></label>
                   <input type="text" formControlName="surname" id="surname" class="form-control ms-1" placeholder="Apellido" required maxlength="30">
                   <div class="alert alert-danger mt-2" [hidden]="surname.valid ||surname.pristine">
-                    <span *ngIf="surname.errors?.['required']">El apellido es obligatorio</span>
-                    <span *ngIf="surname.errors?.['pattern']">El apellido debe contener solo letras</span>
+                    <div *ngIf="surname.errors?.['required']">El apellido es obligatorio.</div>
+                    <div *ngIf="surname.errors?.['minlength']">El apellido debe tener al menos 3 caracteres.</div>
+                    <div *ngIf="surname.errors?.['pattern']">El apellido debe contener solo letras.</div>
                   </div>
                 </div>
               </div>
-
-
             <!--GRUPO EMAIL/DIRECCION-->
-            <div class="d-flex mb-3">
-                <label for="correo"></label>
-                <input type="email" formControlName="email" id="correo" class="form-control" placeholder="Email" required>
-                
-                <label for="direccion"></label>
-                <input type="text" formControlName="direccion"  id="direccion" class="form-control ms-1" placeholder="Dirección" required>
+            <div class="d-flex flex-row mb-3 form-group ">
+                <div class="col-md-6 col col-sm-6 col-lg-6">
+                <label for="email"></label>
+                <input type="email" formControlName="email" id="email" class="form-control" placeholder="Email" required>
+                <div class="alert alert-danger mt-2" [hidden]="email.valid ||email.pristine">
+                    <div *ngIf="email.errors?.['required']">
+                        El email es obligatorio.
+                    </div>
+                    <div *ngIf="email.errors?.['email']">
+                        El email debe ser valido.
+                    </div>
+                </div>
+                </div>
+
+
+                <div class="col-md-6 col col-sm-6 col-lg-6">
+                <label for="address"></label>
+                <input type="address" formControlName="address"  id="address" class="form-control ms-1" placeholder="Dirección" required>
+                <div class="alert alert-danger mt-2" [hidden]="address.valid ||address.pristine">
+                    <div *ngIf="address.errors?.['required']">
+                        La dirección es obligatoria.
+                    </div>
+                    <div *ngIf="address.errors?.['pattern']">
+                        La dirección debe ser valida.
+                    </div>
+                </div>
+                </div>
             </div>
             <!--GRUPO BARRIO/LOCALIDAD-->
-            <div class="d-flex mb-3">
-                <label for="barrio"></label>
-                <input type="text" formControlName="barrio" id="barrio" class="form-control" placeholder="Barrio" required>
-                <label for="localidad"></label>
-                <input type="text" formControlName="localidad"  id="localidad" class="form-control ms-1" placeholder="Localidad">
+            <div class="d-flex flex-row  mb-3 form-group ">
+                <div class="col-md-6 col col-sm-6 col-lg-6">
+                <label for="neighborhood"></label>
+                <input type="text" formControlName="neighborhood" id="neighborhood" class="form-control" placeholder="Barrio" required>
+                <div class="alert alert-danger mt-2 p-6" [hidden]="neighborhood.valid ||neighborhood.pristine">
+                    <div *ngIf="neighborhood.errors?.['required']">El barrio es obligatorio.</div>
+                    <div *ngIf="neighborhood.errors?.['pattern']">El barrio debe ser valido.</div>
+                </div>
+                </div>
+                <div class="col-md-6 col col-sm-6 col-lg-6"> 
+                <label for="location"></label>
+                <input type="text" formControlName="location"  id="location" class="form-control ms-1" placeholder="Localidad">
+                <div class="alert alert-danger mt-2" [hidden]="location.valid ||location.pristine">
+                    <div *ngIf="location.errors?.['required']">La localidad es obligatoria.</div>
+                    <div *ngIf="location.errors?.['pattern']">La localidad debe ser valida.</div>
+                </div>
+            
+                </div>
             </div>
             <!--GRUPO TELEFONO/CP-->
-            <div class="d-flex mb-3">
-                <label for="telefono"></label>
-                <input type="tel" formControlName="telefono" id="telefono" class="form-control" placeholder="Teléfono" required>
-                <label for="cp"></label>
-                <input type="text" formControlName="cp" id="cp" class="form-control ms-1" placeholder="CP" required>
+            <div class="d-flex flex-row mb-3 form-group ">
+                <div class="col-md-6 col col-sm-6 col-lg-6">
+                <label for="phone"></label>
+                <input type="tel" formControlName="phone" id="phone" class="form-control" placeholder="Teléfono" required>
+                <div class="alert alert-danger mt-2" [hidden]="location.valid ||location.pristine">
+                    <div *ngIf="phone.errors?.['required']">El número de teléfono es obligatorio.</div>
+                    <div *ngIf="phone.errors?.['pattern']">El número de teléfono debe tener entre 10 y 15 dígitos y solo contener números.</div>
+                  </div>
+                </div>
+                <div class="col-md-6 col col-sm-6 col-lg-6">
+                <label for="postcode"></label>
+                <input type="text" formControlName="postcode" id="postcode" class="form-control ms-1 " placeholder="CP" required>
+                <div class="alert alert-danger mt-2" [hidden]="location.valid ||location.pristine">
+                    <div *ngIf="postcode.errors?.['required']">El código postal es obligatorio.</div>
+                    <div *ngIf="postcode.errors?.['pattern']">El código postal debe ser de 4 dígitos o en formato CPA (A1234BCD).</div>
+                  </div>
+                </div>
             </div>
             <!--GRUPO CONTRASEÑAS-->
-            <div class="d-flex mb-3">
+            <div class="d-flex flex-row mb-3 form-group">
+                <div class="col-md-6 col col-sm-6 col-lg-6">
                 <label for="password"></label>
                 <input type="password" formControlName="password" id="password" class="form-control" placeholder="Contraseña" required>
+                <div class="alert alert-danger mt-2" [hidden]="location.valid ||location.pristine">
+                    <div *ngIf="password.errors?.['required']">La contraseña es obligatoria.</div>
+                    <div *ngIf="password.errors?.['pattern']">
+                      La contraseña debe tener al menos 8 caracteres, incluyendo al menos una letra minúscula, una letra mayúscula y un número.
+                    </div>
+                </div>
+                </div>
+
+                <div class="col-md-6 col col-sm-6 col-lg-6">
                 <label for="password2"></label>
                 <input type="password" formControlName="password2"id="password2" name="contrasenia2" class="form-control ms-1"
                     placeholder="Confirmar Contraseña" required>
+                 <div class="alert alert-danger mt-2" [hidden]="location.valid ||location.pristine">
+                    <div *ngIf="password2.errors?.['required']">La confirmación de la contraseña es obligatoria.</div>
+                    <div *ngIf="password2.errors?.['passwordMismatch']">
+                     Las contraseñas deben ser iguales.
+                    </div>
+                </div>
+                </div>
             </div>
-
-
-            <button type="submit" class="btn input-submit w-100 " value="registar" id="submitButton"
-                onclick="event">Enviar</button>
-                <br><br>
-            <a class="enlace" routerLink="/login" [href]="'/login'">¿Ya tenés una cuenta? <b> Iniciá
+           <br>
+           <div>
+            <button type="submit" class="btn input-submit w-100" value="registar" id="submitButton"
+                onclick="event">Enviar</button></div>
+             
+                
+            <br>
+            <a class="link" routerLink="/login" [href]="'/login'">¿Ya tenés una cuenta? <b> Iniciá
                     sesión</b></a>
-            <p id="mensajeError" style="color:#F12C3E; font-size: 13px;"></p> <!--agregue-->
+           
         </form>
+        <br>
     </div>
 
 </main>
