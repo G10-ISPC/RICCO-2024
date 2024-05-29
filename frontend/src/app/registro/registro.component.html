@@ -84,7 +84,7 @@
                 <div class="col-md-6 col col-sm-6 col-lg-6">
                 <label for="phone"></label>
                 <input type="tel" formControlName="phone" id="phone" class="form-control" placeholder="Teléfono" required>
-                <div class="alert alert-danger mt-2" [hidden]="location.valid ||location.pristine">
+                <div class="alert alert-danger mt-2" [hidden]="phone.valid ||phone.pristine">
                     <div *ngIf="phone.errors?.['required']">El número de teléfono es obligatorio.</div>
                     <div *ngIf="phone.errors?.['pattern']">El número de teléfono debe tener entre 10 y 15 dígitos y solo contener números.</div>
                   </div>
@@ -92,7 +92,7 @@
                 <div class="col-md-6 col col-sm-6 col-lg-6">
                 <label for="postcode"></label>
                 <input type="text" formControlName="postcode" id="postcode" class="form-control ms-1 " placeholder="CP" required>
-                <div class="alert alert-danger mt-2" [hidden]="location.valid ||location.pristine">
+                <div class="alert alert-danger mt-2" [hidden]="postcode.valid ||postcode.pristine">
                     <div *ngIf="postcode.errors?.['required']">El código postal es obligatorio.</div>
                     <div *ngIf="postcode.errors?.['pattern']">El código postal debe ser de 4 dígitos o en formato CPA (A1234BCD).</div>
                   </div>
@@ -103,7 +103,7 @@
                 <div class="col-md-6 col col-sm-6 col-lg-6">
                 <label for="password"></label>
                 <input type="password" formControlName="password" id="password" class="form-control" placeholder="Contraseña" required>
-                <div class="alert alert-danger mt-2" [hidden]="location.valid ||location.pristine">
+                <div class="alert alert-danger mt-2" [hidden]="password.valid ||password.pristine">
                     <div *ngIf="password.errors?.['required']">La contraseña es obligatoria.</div>
                     <div *ngIf="password.errors?.['pattern']">
                       La contraseña debe tener al menos 8 caracteres, incluyendo al menos una letra minúscula, una letra mayúscula y un número.
@@ -115,7 +115,7 @@
                 <label for="password2"></label>
                 <input type="password" formControlName="password2"id="password2" name="contrasenia2" class="form-control ms-1"
                     placeholder="Confirmar Contraseña" required>
-                 <div class="alert alert-danger mt-2" [hidden]="location.valid ||location.pristine">
+                 <div class="alert alert-danger mt-2" [hidden]="password2.valid ||password2.pristine">
                     <div *ngIf="password2.errors?.['required']">La confirmación de la contraseña es obligatoria.</div>
                     <div *ngIf="password2.errors?.['passwordMismatch']">
                      Las contraseñas deben ser iguales.
@@ -125,7 +125,7 @@
             </div>
            <br>
            <div>
-            <button type="submit" class="btn input-submit w-100" value="registar" id="submitButton"
+            <button type="submit" class=" col-md-12 btn input-submit w-100" [disabled]="formRegister.invalid" value="registar" id="submitButton"
                 onclick="event">Enviar</button></div>
              
                 
