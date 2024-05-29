@@ -3,7 +3,6 @@ import { ProductosComponent } from './productos/productos.component';
 import { HomeComponent } from './home/home.component';
 import { NosotrosComponent } from './nosotros/nosotros.component';
 import { ContactoComponent } from './contacto/contacto.component';
-import { CarritoComponent } from './carrito/carrito.component';
 import { Error404Component } from './error404/error404.component';
 import { AdminComponent } from './admin/admin.component';
 import { RegistroComponent } from './registro/registro.component';

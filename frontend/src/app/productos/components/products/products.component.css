@@ -36,12 +36,12 @@
     filter: invert(0%) sepia(93%) saturate(40%) hue-rotate(190deg) brightness(99%) contrast(99%);
 }
 
-main{
+/* body{
     margin:0px;
     padding:0px;
     width:100%;
-    /* background: #E6E4E5; */
-}
+    background: #E6E4E5;
+} */
 
 #fondo {
     background-color: #475162;
@@ -73,14 +73,16 @@ h2{
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+    /* background-color:#E6E4E5 ; */
 }
 
-#adms {
+/* #adms {
     margin: 20px 20px 50px;
     perspective: 1000px;
-}
+} */
 
-#adm {
+
+/* #adm {
 color: rgb(0, 0, 0);
 background-color: #d2d4da;
 
@@ -91,6 +93,5 @@ table.table td a.edit {
 table.table td a.delete {
     color: #E34724;
 }
- 
- 
+  */
 
