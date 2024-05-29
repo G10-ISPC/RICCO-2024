@@ -36,7 +36,7 @@ main{
     transition: .5s ease-in-out; 
 }
 .contenedor-registro{
-    position: absoluto;
+    position: absolute;
     width: 85%;
     height: 1000px;
     right: -350px;
