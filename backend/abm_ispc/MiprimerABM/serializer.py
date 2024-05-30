@@ -5,7 +5,8 @@ from.models import Barrio
 from.models import Rol
 from.models import Producto
 from.models import Direccion
-from.models import Usuario
+
+#from.models import Usuario
 
 class LocalidadSerializer(serializers.ModelSerializer):
  class Meta:
@@ -34,10 +35,10 @@ class DireccionSerializer(serializers.ModelSerializer):
   fields=('calle', 'numero', 'id_barrio')
     #fields=('nombre','observacion')
     
-class UsuarioSerializer(serializers.ModelSerializer):
- class Meta:
-  model= Usuario
-  fields=('id_usuario', 'nombre', 'email')
+# class UsuarioSerializer(serializers.ModelSerializer):
+#  class Meta:
+#   model= Usuario
+#   fields=('id_usuario', 'nombre', 'email')
   #fields='__all__'
   
 #----------user
@@ -51,7 +52,7 @@ class UserSerializer(serializers.ModelSerializer):
 class RegisterSerializer(serializers.ModelSerializer):
  class Meta:
   model = User
-  fields = ('id', 'username', 'email', 'password')
+  #fields = ('id', 'username', 'email', 'password')
  extra_kwargs = {'password': {'write_only': True}}
 
 def create(self, validated_data):

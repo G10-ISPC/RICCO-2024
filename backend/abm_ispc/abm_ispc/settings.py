@@ -20,7 +20,7 @@ DATABASES = {
 'ENGINE': 'django.db.backends.mysql',
 'NAME': 'abm_ispc',
 'USER': 'root',
-'PASSWORD': '123456',
+'PASSWORD': '',
 'HOST': 'localhost',
 'PORT': '3306',
 'OPTIONS': {
@@ -97,6 +97,8 @@ WSGI_APPLICATION = 'abm_ispc.wsgi.application'
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
+
+AUTH_USER_MODEL = 'MiprimerABM.CustomUser' #NUEVO
 
 AUTH_PASSWORD_VALIDATORS = [
     {
