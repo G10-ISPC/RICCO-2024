@@ -14,7 +14,7 @@ router.register(r'barrio',views.BarrioViewSet)
 router.register(r'rol',views.RolViewSet)
 router.register(r'producto',views.ProductoViewSet)
 router.register(r'direccion',views.DireccionViewSet)
-router.register(r'usuario',views.UsuarioViewSet)
+#router.register(r'usuario',views.UsuarioViewSet)
 #----
 urlpatterns = [
       #-------------------user
