@@ -162,7 +162,7 @@ class CustomUser(AbstractUser):
     email=  models.EmailField(max_length=150, unique=True)
     telefono = models.CharField(max_length=50, blank=False)  
     direccion = models.ForeignKey(Direccion,  related_name='usuarios', to_field='id_direccion', on_delete=models.CASCADE, blank=True, null=True)
-    id_rol = models.ForeignKey(Rol,  related_name='usuarios', to_field='id_rol', on_delete=models.CASCADE, blank=True, null=True)
+    id_rol = models.ForeignKey(Rol,  related_name='roles', to_field='id_rol', on_delete=models.CASCADE, blank=True, null=True)
    
     class Meta:
         verbose_name = 'CustomUser'

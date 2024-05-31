@@ -43,7 +43,7 @@ class DireccionSerializer(serializers.ModelSerializer):
 class UserSerializer(serializers.ModelSerializer):
  class Meta:
   model = CustomUser
-  fields = ('id', 'username', 'email',  'first_name','last_name', 'nro_documento', 'telefono')
+  fields = ('id', 'username', 'email',  'first_name','last_name', 'password', 'telefono')
 
 
 class RegisterSerializer(serializers.ModelSerializer):
