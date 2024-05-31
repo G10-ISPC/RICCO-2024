@@ -130,7 +130,7 @@ class Rol_Permiso(models.Model):
     id_permiso = models.ForeignKey(Permiso, to_field='id_permiso', on_delete=models.CASCADE)
     id_rol = models.ForeignKey(Rol, to_field='id_rol', on_delete=models.CASCADE)
 
-    # id_rol = models.ForeignKey(rol, on_field='id_rol', on_delete=models.CASCADE)
+    
 
     class Meta:
         db_table = 'Rol_Permiso'
@@ -157,11 +157,16 @@ class Pedido(models.Model):
         return str(self.id_pedido)
 
 class CustomUser(AbstractUser):
-    apellido = models.CharField(max_length=50, blank=False)  # Agregar un valor predeterminado
-    nombre = models.CharField(max_length=50, blank=False)  # Agregar un valor predeterminado
-    telefono = models.CharField(max_length=50, blank=False)  # Agregar un valor predeterminado
-    direccion = models.ForeignKey(Direccion, to_field='id_direccion', on_delete=models.CASCADE, blank=True, null=True)
-    id_rol = models.ForeignKey(Rol, to_field='id_rol', on_delete=models.CASCADE, blank=True, null=True)
+    #apellido = models.CharField(max_length=50, blank=False)  
+    #nombre = models.CharField(max_length=50, blank=False)  
+    email=  models.EmailField(max_length=150, unique=True)
+    telefono = models.CharField(max_length=50, blank=False)  
+    direccion = models.ForeignKey(Direccion,  related_name='usuarios', to_field='id_direccion', on_delete=models.CASCADE, blank=True, null=True)
+    id_rol = models.ForeignKey(Rol,  related_name='usuarios', to_field='id_rol', on_delete=models.CASCADE, blank=True, null=True)
+   
     class Meta:
         verbose_name = 'CustomUser'
         verbose_name_plural = 'CustomUsers'
+    
+        def __str__(self):
+         return f"{self.email}"
