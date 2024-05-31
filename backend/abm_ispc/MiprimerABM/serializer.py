@@ -6,6 +6,11 @@ from.models import Rol
 from.models import Producto
 from.models import Direccion
 from.models import Usuario
+from.models import Compra
+from.models import Detalle
+from.models import Pedido
+from.models import Permiso
+from.models import Rol_Permiso
 
 class LocalidadSerializer(serializers.ModelSerializer):
  class Meta:
@@ -61,3 +66,32 @@ def create(self, validated_data):
 
 
 #-------------------fin_user
+class CompraSerializer(serializers.ModelSerializer):
+    class Meta:
+      model= Compra
+      fields='__all__'
+
+class DetalleSerializer(serializers.ModelSerializer):
+    class Meta:
+      model= Detalle
+      fields='__all__'
+
+
+class PermisoSerializer(serializers.ModelSerializer):
+    class Meta:
+      model= Permiso
+      fields='__all__'
+                
+    
+class Rol_PermisoSerializer(serializers.ModelSerializer):
+    class Meta:
+      model= Rol_Permiso
+      fields='__all__' 
+       
+       
+
+class PedidoSerializer(serializers.ModelSerializer):
+  class Meta:
+      model= Pedido
+      fields='__all__'
+        
