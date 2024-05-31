@@ -59,12 +59,3 @@ body {
 .table-hover tbody tr:hover {
     background-color: #0b0b0b;
 }
-
-.cartIcon {
-    height:35px;
-    filter: invert(98%) sepia(4%) saturate(2%) hue-rotate(220deg) brightness(113%) contrast(100%);
-}
-
-.cartIcon:hover {
-    filter: invert(0%) sepia(93%) saturate(40%) hue-rotate(190deg) brightness(99%) contrast(99%);
-}

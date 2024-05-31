@@ -8,24 +8,12 @@ from .serializer import RolSerializer
 from .serializer import ProductoSerializer
 from .serializer import DireccionSerializer
 from .serializer import UsuarioSerializer
-from .serializer import CompraSerializer
-from .serializer import DetalleSerializer
-from .serializer import PedidoSerializer
-from .serializer import PermisoSerializer
-from .serializer import Rol_PermisoSerializer
-
 from .models import Localidad
 from .models import Barrio
 from .models import Rol
 from .models import Producto
 from .models import Direccion
 from .models import Usuario
-from .models import Compra
-from .models import Detalle
-from .models import Permiso
-from .models import Pedido
-from .models import Rol_Permiso
-
 
 #----------user
 from rest_framework import generics, permissions
@@ -86,23 +74,3 @@ class DireccionViewSet(viewsets.ModelViewSet):
 class UsuarioViewSet(viewsets.ModelViewSet):
  queryset=Usuario.objects.all()
  serializer_class= UsuarioSerializer
- 
-class CompraViewSet(viewsets.ModelViewSet):
-  queryset=Compra.objects.all()
-  serializer_class= CompraSerializer
-
-class DetalleViewSet(viewsets.ModelViewSet):
-  queryset=Detalle.objects.all()
-  serializer_class= DetalleSerializer
-
-class PermisoViewSet(viewsets.ModelViewSet):
-  queryset=Permiso.objects.all()
-  serializer_class= PermisoSerializer                
-    
-class Rol_PermisoViewSet(viewsets.ModelViewSet):
-  queryset=Rol_Permiso.objects.all()
-  serializer_class= Rol_PermisoSerializer        
-       
-class PedidoViewSet(viewsets.ModelViewSet):
-  queryset=Pedido.objects.all()
-  serializer_class= PedidoSerializer 

@@ -8,22 +8,17 @@ import { AdminComponent } from './admin/admin.component';
 import { RegistroComponent } from './registro/registro.component';
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { ComprasrecientesComponent } from './dashboard/comprasrecientes/comprasrecientes.component';
-import { HistorialdecomprasComponent } from './dashboard/historialdecompras/historialdecompras.component';
 
 
-export const routes: Routes = [  
-    {path: "", redirectTo: "/home", pathMatch: "full" },
-    {path: "login", component: LoginComponent },
-    {path: 'productos', component: ProductosComponent },
-    {path: 'home', component: HomeComponent },
-    {path: 'nosotros', component: NosotrosComponent },
-    {path: 'contacto', component: ContactoComponent },
-    {path: 'administrador', component: AdminComponent},
-    {path: 'registro', component: RegistroComponent },
-    {path: 'dashboard', component: DashboardComponent },
-    {path: 'comprasrecientes', component: ComprasrecientesComponent},
-    {path: 'historialdecompras', component: HistorialdecomprasComponent},  
-    {path: '**', component: Error404Component },
-      
+export const routes: Routes = [
+    { path: "", redirectTo: "/home", pathMatch: "full" },
+    { path: "login", component: LoginComponent },
+    { path: 'productos', component: ProductosComponent },
+    { path: 'home', component: HomeComponent },
+    { path: 'nosotros', component: NosotrosComponent },
+    { path: 'contacto', component: ContactoComponent },
+    { path: 'administrador', component: AdminComponent},
+    { path: 'registro', component: RegistroComponent },
+    { path: 'dashboard', component: DashboardComponent },
+    { path: '**', component: Error404Component },
 ];

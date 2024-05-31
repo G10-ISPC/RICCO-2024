@@ -10,7 +10,6 @@ from .models import Compra
 from .models import Detalle
 from .models import Permiso
 from .models import Rol_Permiso
-from .models import Pedido
 
 
 class LocalidadAdmin(admin.ModelAdmin):
@@ -41,10 +40,7 @@ class PermisoAdmin(admin.ModelAdmin):
     list_display = ('id_permiso', 'nombre_permiso', 'descripcion') 
      
 class Rol_PermisoAdmin(admin.ModelAdmin):
-    list_display = ('id_rol_permiso', 'id_permiso', 'id_rol') 
-
-class PedidoAdmin(admin.ModelAdmin):
-    list_display = ('id_pedido', 'fecha_pedido', 'estado')     
+    list_display = ('id_rol_permiso', 'id_permiso', 'id_rol')  
     
 
     
@@ -60,8 +56,6 @@ admin.site.register(Compra, CompraAdmin)
 admin.site.register(Detalle, DetalleAdmin)
 admin.site.register(Permiso, PermisoAdmin)
 admin.site.register(Rol_Permiso, Rol_PermisoAdmin)
-admin.site.register(Pedido, PedidoAdmin)
-
 
 
 
