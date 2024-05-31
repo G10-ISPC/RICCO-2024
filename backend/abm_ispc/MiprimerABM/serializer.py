@@ -5,7 +5,10 @@ from.models import Barrio
 from.models import Rol
 from.models import Producto
 from.models import Direccion
-from.models import Usuario
+from .models import *
+
+
+#from.models import Usuario
 
 class LocalidadSerializer(serializers.ModelSerializer):
  class Meta:
@@ -34,30 +37,35 @@ class DireccionSerializer(serializers.ModelSerializer):
   fields=('calle', 'numero', 'id_barrio')
     #fields=('nombre','observacion')
     
-class UsuarioSerializer(serializers.ModelSerializer):
- class Meta:
-  model= Usuario
-  fields=('id_usuario', 'nombre', 'email')
-  #fields='__all__'
-  
+
 #----------user
 
 class UserSerializer(serializers.ModelSerializer):
  class Meta:
-  model = User
-  fields = ('id', 'username', 'email')
+  model = CustomUser
+  fields = ('id', 'username', 'email',  'first_name','last_name', 'password', 'telefono')
 
 
 class RegisterSerializer(serializers.ModelSerializer):
  class Meta:
-  model = User
-  fields = ('id', 'username', 'email', 'password')
+  #model = User
+  model= CustomUser
+  fields = ('id', 'username', 'email', 'password','first_name','last_name', 'telefono')
  extra_kwargs = {'password': {'write_only': True}}
 
 def create(self, validated_data):
- User = User.objects.create_user(validated_data['username'], validated_data['email'], validated_data['password'])
+ #User = User.objects.create_user(
+ User = CustomUser.objects.create_user(
+   validated_data['username'], 
+   validated_data['email'], 
+   validated_data['password'],
+   validated_data['first_name'],
+   validated_data['last_name'],
+   validated_data['password'],
+   validated_data['telefono']
+   )
 
  return User
-
+ 
 
 #-------------------fin_user

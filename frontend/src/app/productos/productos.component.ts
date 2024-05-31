@@ -1,12 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, computed } from '@angular/core';
+import { ProductsComponent } from './components/products/products.component';
+import { RouterModule } from '@angular/router';
+import { CartComponent } from '../cart/cart.component';
+import { CartService } from '../services/cart.service';
+
 
 @Component({
   selector: 'app-productos',
   standalone: true,
-  imports: [],
+  imports: [ProductsComponent, CartComponent, RouterModule],
   templateUrl: './productos.component.html',
-  styleUrl: './productos.component.css'
+  styleUrl: './productos.component.css',
 })
 export class ProductosComponent {
+  total = computed(() => this.cartService.cart().total);
 
+  constructor(private cartService: CartService) {}
 }
