@@ -4,6 +4,8 @@ export interface Product {
     description: string;
     price: number;
     imageUrl: string;
+
+
 }
 
 export const PRODUCTS: Product[] = [
@@ -66,3 +68,19 @@ export const PRODUCTS: Product[] = [
     imageUrl: '../assets/img/bur8.jpg',
     },
 ];
+
+export class Product {
+    id: string;
+    name: string;
+    description: string;
+    price: number;
+    imageUrl: string;
+  
+    constructor(id: string = '', name: string = '', description: string = '', price: number = 0, imageUrl: string = '') {
+      this.id = id;
+      this.name = name;
+      this.description = description;
+      this.price = price;
+      this.imageUrl = imageUrl;
+    }
+  }

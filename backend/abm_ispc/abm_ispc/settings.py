@@ -8,7 +8,15 @@ DATABASES = {
 'ENGINE': 'django.db.backends.mysql',
 'NAME': 'abm_ispc',
 'USER': 'root',
+<<<<<<< Updated upstream
 'PASSWORD': '',
+=======
+<<<<<<< Updated upstream
+'PASSWORD': '1234',
+=======
+'PASSWORD': 'MYSkitsune824',
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
 'HOST': 'localhost',
 'PORT': '3306',
 'OPTIONS': {
@@ -49,9 +57,11 @@ MIDDLEWARE = [
 
 ]
 
+CORS_ALLOW_ALL_ORIGINS = True
+# O
 CORS_ALLOWED_ORIGINS = [
-    'http://localhost',
-    ]
+    'http://localhost:4200',
+]
 
 ROOT_URLCONF = 'abm_ispc.urls'
 
