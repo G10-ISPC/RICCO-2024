@@ -1,1 +1,44 @@
-<p>cart works!</p>
+<div id="cart-container" class="container">
+    <div id="cart-content">
+        <h2 id="cart-title">Carrito de Compras</h2>
+        <!-- TITULOS TABLA -->
+        <table id="cart-table"> 
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Precio Unitario</th>
+                    <th>Total</th>
+                    <th>Eliminar Producto</th>
+                </tr>
+            </thead>
+        </table>
+
+        <div>
+            <strong>Cart </strong>({{
+                count() === 1 ? count() + " item" : count() + " items"
+            }})
+        </div>
+
+
+        @if (count()) {   
+        <div class="total">
+        
+                    @for (item of items(); track item.id) {
+                        <app-cart-item-card
+                        [item]="item"
+                        (itemQuantityUpdate)="onItemQuantityUpdate($event, item.id)"
+                            (removeItem)="onRemoveItem(item.id)"
+                        ></app-cart-item-card>
+                        }
+            
+            
+            Total Price: ({{ count() === 1 ? count() + " item" : count() + " items" }}) 
+            <div >${{ total() }}</div>
+        </div>
+
+    }@else{
+        <div class="cart-empty">El carrito está vacío!</div>
+    }
+    
+</div>
