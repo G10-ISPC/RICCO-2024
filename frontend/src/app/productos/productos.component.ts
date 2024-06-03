@@ -10,11 +10,11 @@ import { CartService } from '../services/cart.service';
 @Component({
   selector: 'app-productos',
   standalone: true,
-  imports: [ DecimalPipe, ProductsComponent, RouterModule, RouterLink, CartComponent,],
+  imports: [ DecimalPipe, ProductsComponent, RouterModule, RouterLink, CartComponent ],
   templateUrl: './productos.component.html',
   styleUrl: './productos.component.css',
 })
-export class productosComponent {
+export class ProductosComponent {
   
   total = computed(() => this.cartService.cart().total);
   count = computed(() => this.cartService.cart().count);

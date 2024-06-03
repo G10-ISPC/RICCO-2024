@@ -1,15 +1,16 @@
 import { Component, computed } from '@angular/core';
 import { CartService } from '../services/cart.service';
 import { CartItemCardComponent } from './components/cart-item-card/cart-item-card.component';
-import { productosComponent } from '../productos/productos.component';
+import { ProductosComponent } from '../productos/productos.component';
 import { AmountAdjusterComponent } from './components/amount-adjuster/amount-adjuster.component';
 import { CommonModule } from '@angular/common';
+import { RouterLink, RouterModule } from '@angular/router';
 
 
 @Component({
   selector: 'app-cart',
   standalone: true,
-  imports: [CartItemCardComponent, productosComponent, AmountAdjusterComponent, CommonModule],
+  imports: [CommonModule, CartItemCardComponent, ProductosComponent, AmountAdjusterComponent, CartComponent, RouterModule, RouterLink ],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.css',
 })
