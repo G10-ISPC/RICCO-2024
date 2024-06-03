@@ -6,7 +6,6 @@ import { AmountAdjusterComponent } from './components/amount-adjuster/amount-adj
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterModule } from '@angular/router';
 
-
 @Component({
   selector: 'app-cart',
   standalone: true,
@@ -36,4 +35,5 @@ export class CartComponent {
     const item = this.items().find((t) => t.id === id);
     this.cartService.removeItem(item!);
   }
+
 }

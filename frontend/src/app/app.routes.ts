@@ -27,4 +27,5 @@ export const routes: Routes = [
     { path: 'comprasrecientes', component: ComprasrecientesComponent },
     { path: 'cart', component: CartComponent },
     { path: '**', component: Error404Component },
+    { path: 'cart', component: CartComponent },
 ];
