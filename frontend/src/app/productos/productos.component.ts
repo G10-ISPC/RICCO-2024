@@ -14,7 +14,7 @@ import { CartService } from '../services/cart.service';
   templateUrl: './productos.component.html',
   styleUrl: './productos.component.css',
 })
-export class productosComponent {
+export class ProductosComponent {
   
   total = computed(() => this.cartService.cart().total);
   count = computed(() => this.cartService.cart().count);
