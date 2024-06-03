@@ -1,7 +1,11 @@
 <main>
   <!-- ICONO CARRITO -->
-  <a [routerLink]="['../app-cart']" [href]="'/app-cart'" class="cartButton" target="blank">
-    <img  class="cartIcon" src="../assets/img/cart1.png" >
+  <a routerlink="/cart" [href]="'/cart'" tabindex="0" class="cartButton">
+  <!--  -->
+    <img  class="cartIcon" src="../assets/img/cart1.png">
+    <!-- class="cart-icon link" -->
+    <span class="cart-count">{{ count() }}</span>
+    <span class="cart-total">${{ total() | number : "1.2-2" }}</span>
   </a>
 
     <section>

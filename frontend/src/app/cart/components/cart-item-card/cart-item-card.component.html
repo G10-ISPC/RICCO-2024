@@ -1,1 +1,14 @@
-<p>cart-item-card works!</p>
+<!-- FILAS DINÁMICAS DE LA TABLA -->
+@if (item) {
+    <tbody id="cart-items">
+        <tr>
+            <td>{{ item.name }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>{{ item.price }}</td>
+            <td>{{ item.price * item.quantity }}</td>
+            <td>
+                <button (click)="onRemoveItem()">Eliminar</button>
+            </td>
+        </tr>
+    </tbody>
+    }
