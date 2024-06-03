@@ -19,7 +19,7 @@ export const routes: Routes = [
     { path: 'home', component: HomeComponent },
     { path: 'nosotros', component: NosotrosComponent },
     { path: 'contacto', component: ContactoComponent },
-    { path: 'administrador', component: AdminComponent},
+    { path: 'admin', component: AdminComponent},
     { path: 'registro', component: RegistroComponent },
     { path: 'dashboard', component: DashboardComponent },
     { path: 'historialdecompras', component: HistorialdecomprasComponent },
