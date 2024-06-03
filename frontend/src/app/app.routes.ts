@@ -8,6 +8,9 @@ import { AdminComponent } from './admin/admin.component';
 import { RegistroComponent } from './registro/registro.component';
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { HistorialdecomprasComponent } from './dashboard/historialdecompras/historialdecompras.component';
+import { ComprasrecientesComponent } from './dashboard/comprasrecientes/comprasrecientes.component';
+import { CartComponent } from './cart/cart.component';
 
 
 export const routes: Routes = [
@@ -17,8 +20,12 @@ export const routes: Routes = [
     { path: 'home', component: HomeComponent },
     { path: 'nosotros', component: NosotrosComponent },
     { path: 'contacto', component: ContactoComponent },
-    { path: 'administrador', component: AdminComponent},
+    { path: 'admin', component: AdminComponent},
     { path: 'registro', component: RegistroComponent },
     { path: 'dashboard', component: DashboardComponent },
+    { path: 'historialdecompras', component: HistorialdecomprasComponent },
+    { path: 'comprasrecientes', component: ComprasrecientesComponent },
+    { path: 'cart', component: CartComponent },
     { path: '**', component: Error404Component },
+    { path: 'cart', component: CartComponent },
 ];

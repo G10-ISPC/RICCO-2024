@@ -2,88 +2,35 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     
 
-<body>
-
        <div class="dashboard-container">
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header bg-primary text-white">
-                        Compras Recientes
+                    <div class="card-header bg-primary text-white">                       
+                        <a routerLink="/productos" class="nav-link" target="blank">  Agregar al carrito                 
+                        <img  class="cartIcon" src="../assets/img/cart1.png" ></a>
                     </div>
-                    <div class="card-body">
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th>Producto</th>
-                                    <th>Cantidad</th>
-                                    <th>Fecha</th>
-                                    <th>Estado</th>
-                                    <th>Precio Pagado</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>King Kong Burger</td>
-                                    <td>1</td>
-                                    <td>2023-05-20</td>
-                                    <td><span class="badge badge-success">Entregado</span></td>
-                                    <td>$4500</td>
-                                </tr>
-                                <tr>
-                                    <td>Ricca</td>
-                                    <td>2</td>
-                                    <td>2023-05-19</td>
-                                    <td><span class="badge badge-warning">Cocinando</span></td>
-                                    <td>$6500</td>
-                                </tr>
-                                
-                            </tbody>
-                        </table>
+                <div class="card-body">                        
+                </div>            
+            </div>
+        </div>
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">                        
+                        <a routerLink="/comprasrecientes" class="nav-link" target="blank">Compras Recientes</a>
+                    </div>
+                    <div class="card-body">                        
                     </div>
                 </div>
             </div>
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header bg-primary text-white">
-                        Historial de Compras
+                    <div class="card-header bg-primary text-white">                        
+                        <a routerLink="/historialdecompras" class="nav-link"  target="blank"> Historial de Compras </a>
                     </div>
-                    <div class="card-body">
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th>Producto</th>
-                                    <th>Cantidad</th>
-                                    <th>Fecha</th>
-                                    <th>Estado</th>
-                                    <th>Precio Pagado</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>American</td>
-                                    <td>1</td>
-                                    <td>2023-05-20</td>
-                                    <td><span class="badge badge-success">Entregado</span></td>
-                                    <td>$3900</td>
-                                </tr>
-                                <tr>
-                                    <td>Tasty Ricca</td>
-                                    <td>2</td>
-                                    <td>2023-05-19</td>
-                                    <td><span class="badge badge-danger">Cancelado</span></td>
-                                    <td>$4900</td>                                                                                                         
-                                </tr>
-                               
-                            </tbody>
-                        </table>
+                    <div class="card-body">                    
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-
-    
-</body>
-
-
+    </div>    

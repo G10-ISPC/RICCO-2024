@@ -1,0 +1,14 @@
+*{
+    box-sizing:border-box;
+    font-family: "lato", sans-serif;
+    outline: 0;
+    transition: all 0.5s ease;
+}
+
+#cart-items tr:nth-child(even) {
+    background-color: #e4e3e3;
+}
+
+#cart-items tr:hover {
+    background-color: #e3edf3;
+}

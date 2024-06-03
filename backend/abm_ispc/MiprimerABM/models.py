@@ -1,4 +1,8 @@
 from django.db import models
+#from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
+from django.conf import settings
+ 
 
 class Localidad(models.Model):
     id_localidad = models.AutoField(primary_key=True)
@@ -77,30 +81,12 @@ class Direccion(models.Model):
 
 
     
-class Usuario(models.Model):
-    id_usuario = models.AutoField(primary_key=True)
-    apellido = models.CharField(max_length=50, blank=False, default='Apellido')  # Agregar un valor predeterminado
-    nombre = models.CharField(max_length=50, blank=False, default='Nombre')  # Agregar un valor predeterminado
-    email = models.CharField(max_length=50, blank=False, default='email@example.com')  # Agregar un valor predeterminado
-    telefono = models.CharField(max_length=50, blank=False, default='123456789')  # Agregar un valor predeterminado
-    clave_usuario = models.CharField(max_length=50, blank=False, default='clave')  # Agregar un valor predeterminado
-    direccion = models.ForeignKey(Direccion, to_field='id_direccion', on_delete=models.CASCADE)
-    id_rol = models.ForeignKey(Rol, to_field='id_rol', on_delete=models.CASCADE)
-
-    class Meta:
-        db_table = 'usuario'
-        verbose_name = 'Usuario'
-        verbose_name_plural = 'Usuarios'
-
-    def __str__(self):
-        return str(self.id_usuario) 
-
 class Compra(models.Model):  
     id_compra = models.AutoField(primary_key=True)
     fecha = models.DateField(blank=False, default='2024-01-01')
     descripcion = models.TextField(max_length=1000, blank=False, default='Descripción de la compra')
     precio_total = models.DecimalField(max_digits=10, decimal_places=2, blank=False, default=0.0)
-    id_usuario = models.ForeignKey(Usuario, to_field='id_usuario', on_delete=models.CASCADE)
+    id_usuario = models.ForeignKey(settings.AUTH_USER_MODEL, to_field='id', on_delete=models.CASCADE)
 
     class Meta:
         db_table = 'compra'
@@ -144,7 +130,7 @@ class Rol_Permiso(models.Model):
     id_permiso = models.ForeignKey(Permiso, to_field='id_permiso', on_delete=models.CASCADE)
     id_rol = models.ForeignKey(Rol, to_field='id_rol', on_delete=models.CASCADE)
 
-    # id_rol = models.ForeignKey(rol, on_field='id_rol', on_delete=models.CASCADE)
+    
 
     class Meta:
         db_table = 'Rol_Permiso'
@@ -159,10 +145,9 @@ class Pedido(models.Model):
     id_pedido = models.AutoField(primary_key=True)
     fecha_pedido = models.DateField(blank=False, default='2024-01-01')
     estado = models.CharField(max_length=50, blank=False, default='Pendiente')
-    id_usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+    id_usuario = models.ForeignKey(settings.AUTH_USER_MODEL, to_field='id', on_delete=models.CASCADE)
 
-    # id_usuario = models.ForeignKey(Pedido, on_delete=models.CASCADE)
-    
+     
     class Meta:
         db_table = 'Pedido'
         verbose_name = 'Pedido'
@@ -170,3 +155,18 @@ class Pedido(models.Model):
         
     def __str__(self):
         return str(self.id_pedido)
+
+class CustomUser(AbstractUser):
+    #apellido = models.CharField(max_length=50, blank=False)  
+    #nombre = models.CharField(max_length=50, blank=False)  
+    email=  models.EmailField(max_length=150, unique=True)
+    telefono = models.CharField(max_length=50, blank=False)  
+    direccion = models.ForeignKey(Direccion,  related_name='usuarios', to_field='id_direccion', on_delete=models.CASCADE, blank=True, null=True)
+    id_rol = models.ForeignKey(Rol,  related_name='roles', to_field='id_rol', on_delete=models.CASCADE, blank=True, null=True)
+   
+    class Meta:
+        verbose_name = 'CustomUser'
+        verbose_name_plural = 'CustomUsers'
+    
+        def __str__(self):
+         return f"{self.email}"

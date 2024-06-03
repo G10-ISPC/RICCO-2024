@@ -21,3 +21,4 @@ describe('ProductCardComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+
