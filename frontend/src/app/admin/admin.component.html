@@ -32,19 +32,8 @@
 
         <section id="productos" class="mt-5">
           <h2>Productos</h2>
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Gestión de Productos</h5>
-              <p class="card-text">
-              
-                
-            
-            </p>
-            </div>
-          </div>
-
-          
-          <div class="col-12 mt-5">
+         
+      <div class="col-12 mt-5">
             
             <table class="table table-bordered table-striped table-light">
                 <thead>
@@ -57,16 +46,16 @@
                         
                     </tr>
                 </thead>
-                <tbody id="productos-list">
-
-                  <tr>
-                    <td id="nombre_producto"></td>
-                    <td><img src="" height="50"  alt="foto de hamburguesa" id="foto2"></td>
-                    <td id="descripcion"></td>
-                    <td id="precio"></td>
+                <tbody  id="productos-list">
+                  
+                  <tr *ngFor="let producto of data">
+                    <td id="nombre_producto">{{producto.nombre_producto}}</td>
+                    <td><img src="" height="50"  alt="foto de hamburguesa" id="foto2">{{producto.imageUrl}}</td>
+                    <td id="descripcion">{{producto.descripcion}}</td>
+                    <td id="precio">{{producto.precio}}</td>
                     <td>
                         <a class="edit btn btn-sm" title="Editar" id="edit1" href="#"><i class="fa-solid fa-pencil"></i></a>
-                        <a class="delete btn btn-sm " title="Eliminar" id="delete1" href="#"><i class="fa-solid fa-trash"></i></a>
+                        <a (click)="borrarData(producto.id_producto)" class="delete btn btn-sm " title="Eliminar" id="delete1" href="#"><i class="fa-solid fa-trash"></i></a>
                     </td>
                   </tr>
                 

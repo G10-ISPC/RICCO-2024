@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpHeaders} from '@angular/common/http';
+import { Observable} from 'rxjs';
 import { Product } from '../data/products.data'
 
 
@@ -15,11 +15,23 @@ export class ProductoService {
 
     
   }
+
+  public getData () : Observable<any>{
+    return this.http.get<any>(this.url)
+  }
   
+  deleteData(id: string): Observable<any> {
+    const urldel = `${this.url}${id}/`; 
+    return this.http.delete(urldel);
+  }
+
   createProduct(product:Product):Observable<any>
   
     {
      return this.http.post(this.url, product)
     }
+
+   
+  
 }
 
