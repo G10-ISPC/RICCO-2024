@@ -17,36 +17,52 @@
 </div> -->
 
 <main>
-    <div class="contenedor">
-      <div class="caja" id="form">
-  
-        <form [formGroup]="form" (ngSubmit)="onEnviar($event)" class="contenedor-ingreso" id="ingreso">
-          <div class="caja-titulo">
-            <h3>Bienvenido</h3>
-            <small>Que bueno verte otra vez!!</small>
+  <div class="contenedor">
+    <div class="caja" id="form">
+
+      <form [formGroup]="loginForm" class="contenedor-ingreso" id="ingreso">
+        <div class="caja-titulo">
+          <h3>Bienvenido</h3>
+          <small>Que bueno verte otra vez!!</small>
+        </div>
+        <div class="grupo-inputs">
+          <div class="campo-input">
+            <input type="text" formControlName="email" class="caja-input" id="logEmail" required>
+            @if(Email?.errors && Email?.touched){
+            @if(Email?.hasError('required')){
+            <p class="text-danger">
+              El email es requerido.
+            </p>
+            } @else if (Email?.hasError('email')) {
+            <p class="text-danger" style="font-size: 15px;">
+              El formato de email debe ser valido
+            </p>
+            }
+            }
+            <label for="logEmail">E-mail</label>
           </div>
-          <div class="grupo-inputs">
-            <div class="campo-input">
-              <input type="text" formControlName="email" class="caja-input" id="logEmail" required>
-              <label for="logEmail">E-mail</label>
-            </div>
-            <div class="campo-input">
-              <input type="password" formControlName="password"class="caja-input" id="contrasenaIngreso" required>
-              <label for="contrasenaIngreso">Contraseña</label>
-  
-            </div>
-            <p id="mensajeError" style="color:#F12C3E; font-size: 13px;"></p>
-  
-            <div class="campo-input">
-              <input type="submit" class="input-submit" value="Ingresar" id="submitButton">
-            </div>
-           <!-- <a class="enlace" routerLink="/auth" [href]="'/auth'">¿No tenés cuenta aún? <b> Crear cuenta</b></a>-->
-           <a class="enlace" routerLink="/registro" [href]="'/registro'">¿No tenés cuenta aún? <b> Crear cuenta</b></a>
+          <div class="campo-input">
+            <input type="password" formControlName="password" class="caja-input" id="contrasenaIngreso" required>
+            @if(Password?.errors && Password?.touched){
+            @if(Password?.hasError('required')){
+            <p class="text-danger">
+              La contraseña es requerida.
+            </p>
+            }
+            }
+            <label for="contrasenaIngreso">Contraseña</label>
+
           </div>
-  
-        </form>
-  
-  
-      </div>
+          <div class="campo-input">
+            <input type="submit" (click)="login()" class=" input-submit" value="Ingresar" id="submitButton">
+          </div>
+          <!-- <a class="enlace" routerLink="/auth" [href]="'/auth'">¿No tenés cuenta aún? <b> Crear cuenta</b></a>-->
+          <a class="enlace" routerLink="/registro" [href]="'/registro'">¿No tenés cuenta aún? <b> Crear cuenta</b></a>
+        </div>
+
+      </form>
+
+
     </div>
-  </main>
+  </div>
+</main>
