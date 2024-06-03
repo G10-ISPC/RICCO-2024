@@ -4,7 +4,6 @@ import { AmountAdjusterComponent } from "../amount-adjuster/amount-adjuster.comp
 import { CartComponent } from '../../cart.component';
 import { DecimalPipe } from '@angular/common';
 
-
 @Component({
     selector: 'app-cart-item-card',
     standalone: true,

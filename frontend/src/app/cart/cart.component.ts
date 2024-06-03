@@ -1,15 +1,14 @@
 import { Component, computed } from '@angular/core';
 import { CartService } from '../services/cart.service';
 import { CartItemCardComponent } from './components/cart-item-card/cart-item-card.component';
-import { productosComponent } from '../productos/productos.component';
+import { ProductosComponent } from '../productos/productos.component';
 import { AmountAdjusterComponent } from './components/amount-adjuster/amount-adjuster.component';
 import { CommonModule } from '@angular/common';
-
 
 @Component({
   selector: 'app-cart',
   standalone: true,
-  imports: [CartItemCardComponent, productosComponent, AmountAdjusterComponent, CommonModule],
+  imports: [CartItemCardComponent, ProductosComponent, AmountAdjusterComponent, CommonModule],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.css',
 })
@@ -35,4 +34,5 @@ export class CartComponent {
     const item = this.items().find((t) => t.id === id);
     this.cartService.removeItem(item!);
   }
+
 }
