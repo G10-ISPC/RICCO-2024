@@ -26,6 +26,7 @@ export class CartItemCardComponent {
   onRemoveItem() {
     this.removeItem.next();
   }
+  
 }
 
 
