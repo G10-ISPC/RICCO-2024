@@ -14,7 +14,7 @@
             <label for="logEmail">E-mail</label>
             <div *ngIf = "email?.invalid && (email?.dirty || email?.touched)" class="text-danger"> </div>
               <div *ngIf = "email?.errors?.['required']" class="text-danger">
-                El email es requerido.
+                
               </div>
               <div *ngIf = "email?.errors?.['email']" class="text-danger">
                 El email debe tener formato válido.
