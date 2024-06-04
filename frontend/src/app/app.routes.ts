@@ -25,6 +25,7 @@ export const routes: Routes = [
     { path: 'dashboard', component: DashboardComponent },
     { path: 'historialdecompras', component: HistorialdecomprasComponent },
     { path: 'comprasrecientes', component: ComprasrecientesComponent },
+    { path: 'cart', component: CartComponent },
     { path: '**', component: Error404Component },
     { path: 'cart', component: CartComponent },
 ];

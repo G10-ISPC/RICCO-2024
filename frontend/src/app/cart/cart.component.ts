@@ -4,11 +4,12 @@ import { CartItemCardComponent } from './components/cart-item-card/cart-item-car
 import { ProductosComponent } from '../productos/productos.component';
 import { AmountAdjusterComponent } from './components/amount-adjuster/amount-adjuster.component';
 import { CommonModule } from '@angular/common';
+import { RouterLink, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
   standalone: true,
-  imports: [CartItemCardComponent, ProductosComponent, AmountAdjusterComponent, CommonModule],
+  imports: [CommonModule, CartItemCardComponent, ProductosComponent, AmountAdjusterComponent, CartComponent, RouterModule, RouterLink ],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.css',
 })

@@ -10,7 +10,7 @@ import { CartService } from '../services/cart.service';
 @Component({
   selector: 'app-productos',
   standalone: true,
-  imports: [ DecimalPipe, ProductsComponent, RouterModule, RouterLink, CartComponent,],
+  imports: [ DecimalPipe, ProductsComponent, RouterModule, RouterLink, CartComponent ],
   templateUrl: './productos.component.html',
   styleUrl: './productos.component.css',
 })
