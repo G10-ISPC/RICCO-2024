@@ -1,13 +1,10 @@
-
 main{
     
-    /* background: url("/assets/img/plato.png"); */
-    background: url("/../assets/img/plato.png");
+    background: url("/assets/img/plato.png");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    padding-top: 5vw;
 }
 
 .caja{
@@ -31,17 +28,12 @@ main{
     backdrop-filter: blur(15px);
     border: 3px solid rgba(255, 255, 255, 0.2);
     overflow: hidden;
-
 }
 .contenedor-ingreso{
     position: absolute;
     width: 85%;
     left: 27px;
-    transition: .5s ease-in-out;
-    -webkit-transition: .5s ease-in-out;
-    -moz-transition: .5s ease-in-out;
-    -ms-transition: .5s ease-in-out;
-    -o-transition: .5s ease-in-out;
+    transition: .5s ease-in-out; 
 }
 .contenedor-registro{
     position: absolute;
@@ -53,7 +45,7 @@ main{
 .caja-titulo{
     text-align: center;
     margin: 10px;
-    
+    /*margin: 30px;*/
 }
 .caja-titulo h3{
     font-size: 30px;
@@ -61,7 +53,14 @@ main{
     margin: 20px;
 
 }
-
+/* .icon img{
+    width: 60px;
+    margin-bottom: 10px;
+}
+.icon {
+    display:flex;
+    justify-content:center;
+}  */
 .grupo-inputs{
     width: 100%;
     
@@ -126,13 +125,11 @@ main{
     box-shadow: 0px 4px 20px rgba(62, 9, 9, 0.145);
     cursor: pointer;
     transition: .4s;
-    
 }
 .input-submit:hover{
     background: rgb(90, 87, 87);
     box-shadow: 0px 4px 20px rgba(62, 9, 9, 0.32);
     color:#fff;
-    
 }
 
 .cambio{
@@ -184,4 +181,8 @@ main{
     color: #040404;
 
 }
-
+.form-group{
+    height: 30px;
+    margin-bottom: 10px;
+    margin-top: 0px;
+}
