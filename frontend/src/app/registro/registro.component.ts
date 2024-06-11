@@ -4,7 +4,7 @@ import { FormGroup, FormBuilder, FormControl,Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 
 const letrasPattern = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ]*$/;
-const addressPattern=/^[a-zA-Z0-9\s,'-]*$/;
+const addressPattern=/^[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9\s,'-]*$/;
 const phonePattern=/^\d{10,15}$/;
 const passwordPattern= /^(?=.*[a-z])(?=.*[A-Z])[A-Za-z0-9]{8,}$/;
 const postcodePattern=/^[A-Z]\d{4}[A-Z]{3}$|^\d{4}$/

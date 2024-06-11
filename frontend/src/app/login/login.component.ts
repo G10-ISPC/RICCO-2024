@@ -1,60 +1,82 @@
-import { Component, inject } from '@angular/core';
+
+import { CommonModule } from '@angular/common';
+import { Component,  OnInit} from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { LoginService } from '../services/auth/login.service';
+import { Router, RouterLink } from '@angular/router';
+import { LogService } from '../services/log.service';
+import { LogRequest } from '../data/logRequest';
+
+
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule,],
+
+  imports: [ReactiveFormsModule, CommonModule, RouterLink],
+
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit{
 
-  signIn = inject(LoginService);
-  router = inject(Router);
 
+  loginError: string = "";
   loginForm: FormGroup;
+  
+  constructor(private formBuilder:FormBuilder, private router:Router, private logService: LogService){
 
-  constructor(private formBuilder: FormBuilder) {
-    this.loginForm = this.formBuilder.group(
-      {
+    this.loginForm = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', Validators.required]
+    });
+  }
 
-        email: ['', [Validators.required, Validators.email], []],
+  ngOnInit(): void {}
 
-        password: ['', [Validators.required], []],
+  get email()
+  {
+    return this.loginForm.get('email');
+  }
+
+  get password()
+  {
+    return this.loginForm.get('password');
+  }
+
+  login(): void {
+    if (this.loginForm.valid) {
+      const credentials: LogRequest = this.loginForm.value;
+      this.logService.login(credentials).subscribe({
+    // if(this.loginForm.valid){
+    //   this.logService.login(this.loginForm.value as LogRequest).subscribe({
+        next: (userData) =>{
+          console.log("usuario autenticado.",userData);
+          this.router.navigateByUrl('/home');
+          this.loginForm.reset(); 
+        },
+        error: (error) =>{
+          console.error("Error en el inicio de sesión.",error);
+          this.loginError=error.message;
+        },
+        complete: () => {
+          console.info("Login completo");
+ 
+        }
+        
+      })
+
 
       }
-    )
-  }
 
-  get Email() {
 
-    return this.loginForm.get("email");
-
-  }
-
-  get Password() {
-
-    return this.loginForm.get("password");
-
-  }
-
-  login() {
-    if (this.loginForm.valid) {
-
-      this.signIn.login(this.loginForm.value);
-      this.router.navigate(['/']);
-      this.loginForm.reset();
-
-    } else {
-
+    
+    else{
       this.loginForm.markAllAsTouched();
+      alert("Por favor, complete todos los campos.");
 
-      alert("Error al ingresar los datos")
     }
   }
 
 
 }
+
