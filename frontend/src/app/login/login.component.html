@@ -1,9 +1,11 @@
 <main>
   <div class="contenedor">
     <div class="caja" id="form">
+
 <!--(ngSubmit)="onEnviar($event)"-->
       <form [formGroup]="loginForm" (ngsubmit)="login()" class="contenedor-ingreso " id="ingreso"> 
         <p class="text-danger">{{loginError}}</p>
+
         <div class="caja-titulo">
           <h3>Bienvenido</h3>
           <small>Que bueno verte otra vez!!</small>
@@ -11,6 +13,7 @@
         <div class="grupo-inputs">
           <div class="campo-input">
             <input type="text" formControlName="email" class="caja-input" id="logEmail" required>
+
             <label for="logEmail">E-mail</label>
             <div *ngIf = "email?.invalid && (email?.dirty || email?.touched)" class="text-danger"> </div>
               <div *ngIf = "email?.errors?.['required']" class="text-danger">
@@ -42,3 +45,4 @@
     </div>
   </div>
 </main>
+

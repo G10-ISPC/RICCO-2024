@@ -1,3 +1,4 @@
+
 import { CommonModule } from '@angular/common';
 import { Component,  OnInit} from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -6,14 +7,18 @@ import { LogService } from '../services/log.service';
 import { LogRequest } from '../data/logRequest';
 
 
+
 @Component({
   selector: 'app-login',
   standalone: true,
+
   imports: [ReactiveFormsModule, CommonModule, RouterLink],
+
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
 export class LoginComponent implements OnInit{
+
 
   loginError: string = "";
   loginForm: FormGroup;
@@ -60,12 +65,15 @@ export class LoginComponent implements OnInit{
         
       })
 
+
       }
+
 
     
     else{
       this.loginForm.markAllAsTouched();
       alert("Por favor, complete todos los campos.");
+
     }
   }
 
