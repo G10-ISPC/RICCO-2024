@@ -1,7 +1,8 @@
 from rest_framework import serializers
 
 from django.contrib.auth import get_user_model
-from django.contrib.auth.hashers import make_password
+from rest_framework.validators import UniqueValidator
+from django.contrib.auth.password_validation import validate_password
 
 from .models import CustomUser
 from .models import Localidad
@@ -26,24 +27,50 @@ class UsuarioSerializers(serializers.ModelSerializer):
         fields = ('email', 'password')
         
 class RegistroSerializers(serializers.ModelSerializer):
+    email = serializers.EmailField(
+        required=True,
+        validators=[UniqueValidator(queryset=CustomUser.objects.all())]
+    )
+    password = serializers.CharField(write_only=True, required=True, validators=[validate_password])
+    password2 = serializers.CharField(write_only=True, required=True)
+
     class Meta:
         model = CustomUser
-        fields = ('id', 'username', 'email', 'password', 'first_name', 'last_name', 'telefono')
-        extra_kwargs = {'password': {'write_only': True}}
+        fields = ('username', 'password', 'password2', 'email', 'first_name', 'last_name', 'telefono')
+
+    def validate(self, attrs):
+        if attrs['password'] != attrs['password2']:
+            raise serializers.ValidationError({"password": "Los campos de contraseña no coinciden."})
+        return attrs
 
     def create(self, validated_data):
-        user = CustomUser.objects.create_user(
+        user = CustomUser.objects.create(
             username=validated_data['username'],
             email=validated_data['email'],
-            password=validated_data['password'],
-            first_name=validated_data.get('first_name', ''),
-            last_name=validated_data.get('last_name', ''),
-            telefono=validated_data.get('telefono', '')
+            first_name=validated_data['first_name'],
+            last_name=validated_data['last_name'],
+            telefono=validated_data['telefono'],
         )
+        user.set_password(validated_data['password'])
+        user.save()
         return user
+    
+  #  class Meta:
+ #       model = CustomUser
+#        fields = ('id', 'username', 'email', 'password', 'first_name', #'last_name', 'telefono')
+  #      extra_kwargs = {'password': {'write_only': True}}
 
-    def validate_password(self, value):
-        return make_password(value)       
+ #   def create(self, validated_data):
+#        user = CustomUser.objects.create_user(
+         #   username=validated_data['username'],
+        #    email=validated_data['email'],
+       #      last_name=validated_data.get('last_name', ''),
+     #       telefono=validated_data.get('telefono', '')
+    #    )
+   #     return user
+
+  #  def validate_password(self, value):
+ #       return make_password(value)       
     
 class LocalidadSerializer(serializers.ModelSerializer):
     class Meta:

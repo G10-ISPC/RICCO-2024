@@ -24,7 +24,7 @@ from .serializers import DetalleSerializer
 from .serializers import Rol_PermisoSerializer
 from .serializers import PedidoSerializer
 
-from .models import Localidad
+from .models import CustomUser, Localidad
 from .models import Barrio
 from .models import Rol
 from .models import Producto
@@ -35,36 +35,6 @@ from .models import Detalle
 from .models import Permiso
 from .models import Rol_Permiso
 from .models import Pedido
-
-# import logging
-# logger = logging.getLogger(__name__)
-
-# class LoginView(APIView):
-#     @method_decorator(csrf_exempt)
-#     def post(self, request):
-#         email = request.data.get('email', None)
-#         password = request.data.get('password', None)
-        
-#         logger.debug('Received email: %s', email)
-#         logger.debug('Received password: %s', password)
-        
-#         if not email or not password:
-#             return Response({'error': 'Email y contraseña son requeridos'}, status=status.HTTP_400_BAD_REQUEST)
-        
-#         usuario = authenticate(request, username=email, password=password)
-        
-#         if usuario is not None:
-#             if usuario.is_active:
-#                 login(request, usuario)
-#                 token, created = Token.objects.get_or_create(user=usuario)
-#                 return Response({'token': token.key, 'user': UsuarioSerializers(usuario).data}, status=status.HTTP_200_OK)
-#             else:
-#                 return Response({'error': 'Cuenta desactivada'}, status=status.HTTP_400_BAD_REQUEST)
-#         else:
-#             return Response({'error': 'Credenciales de inicio de sesión incorrectas'}, status=status.HTTP_400_BAD_REQUEST)
-
-#     def get(self, request):
-#         return Response(data={'message': 'GET request processed successfully'})
 
 
 class LoginView(APIView):
@@ -89,18 +59,22 @@ class LogoutView(APIView):
         logout(request)
         return Response(status=status.HTTP_200_OK)
     
+
 class RegistroView(generics.CreateAPIView):
+    queryset = CustomUser.objects.all()
     serializer_class = RegistroSerializers
     permission_classes = [AllowAny]
 
+    @csrf_exempt
     def post(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
+        serializer = self.serializer_class(data=request.data)
+
         if serializer.is_valid():
             user = serializer.save()
             token, created = Token.objects.get_or_create(user=user)
             return Response({'token': token.key, 'user': serializer.data}, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
+    @csrf_exempt
     def get(self, request, *args, **kwargs):
         return Response(data={'message': 'GET request processed successfully'}, status=status.HTTP_200_OK)
     
