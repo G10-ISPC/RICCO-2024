@@ -86,7 +86,7 @@ DATABASES = {
 'ENGINE': 'django.db.backends.mysql',
 'NAME': 'abm_ispc',
 'USER': 'root',
-'PASSWORD': 'root',
+'PASSWORD': '',
 'HOST': 'localhost',
 'PORT': '3306',
 'OPTIONS': {

@@ -13,7 +13,7 @@ import { LogRequest } from '../data/logRequest';
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
-export class LoginComponent implements OnInit{
+export class LoginComponent {
 
   loginError: string = "";
   loginForm: FormGroup;
@@ -21,12 +21,12 @@ export class LoginComponent implements OnInit{
   constructor(private formBuilder:FormBuilder, private router:Router, private logService: LogService){
 
     this.loginForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required]
+      email: ['', [Validators.required, Validators.email],[]],
+      password: ['', [Validators.required],[]],
     });
   }
 
-  ngOnInit(): void {}
+  //ngOnInit(): void {}
 
   get email()
   {
@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit{
     return this.loginForm.get('password');
   }
 
-  login(): void {
+  login() {
     if (this.loginForm.valid) {
       const credentials: LogRequest = this.loginForm.value;
       this.logService.login(credentials).subscribe({
@@ -51,7 +51,7 @@ export class LoginComponent implements OnInit{
         },
         error: (error) =>{
           console.error("Error en el inicio de sesión.",error);
-          this.loginError=error.message;
+          this.loginError=error.message || "Error en el inicio de sesión.";
         },
         complete: () => {
           console.info("Login completo");
