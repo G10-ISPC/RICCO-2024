@@ -9,7 +9,7 @@ import { Product } from '../data/products.data'
 })
 export class ProductoService {
 
-  url="http://127.0.0.1:8000/api/v1producto/"; 
+  url="http://127.0.0.1:8000/api/producto/"; 
   
   constructor(private http:HttpClient) { 
 
