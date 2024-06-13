@@ -104,6 +104,8 @@ class CompraSerializer(serializers.ModelSerializer):
                 
     
 class DetalleSerializer(serializers.ModelSerializer):
+    compra=CompraSerializer('fecha')
+    producto=ProductoSerializer('nombre_producto')    
     class Meta:
         model= Detalle
         fields='__all__' 
