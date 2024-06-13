@@ -20,7 +20,7 @@
           <a class="nav-link text-light" routerLink="/contacto">Contacto</a>
           <a *ngIf="isUserLogin$ | async" class="nav-link text-light" routerLink="/productos">Productos</a>
           <a  *ngIf="isUserLogin$ | async"class="nav-link text-light" routerLink="/dashboard">Mis Compras</a>
-          <a  *ngIf="!(isUserLogin$ | async)" class="nav-link text-light" routerLink="/login">Inicio Sesion</a>
+          <a  *ngIf="!(isUserLogin$ | async)" class="nav-link text-light" routerLink="/login">Iniciar Sesión</a>
           <a  *ngIf="isUserLogin$ | async"class="nav-link text-light" role="button" (click)="logout()">Salida</a>
           
           
