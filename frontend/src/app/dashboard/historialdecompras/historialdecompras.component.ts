@@ -1,13 +1,38 @@
-import { Component } from '@angular/core';
-import { DashboardComponent } from '../dashboard.component';
+import { NgComponentOutlet } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { DetalleService } from '../../services/detalle.service';
+import { ReactiveFormsModule } from '@angular/forms';
+import { Detalle } from '../../data/detalle.data';
+import { Product } from '../../data/products.data';
+import { ProductoService } from '../../services/producto.service';
 
 @Component({
   selector: 'app-historialdecompras',
   standalone: true,
-  imports: [DashboardComponent],
+  imports: [AsyncPipe, NgComponentOutlet, CommonModule, ReactiveFormsModule ],
   templateUrl: './historialdecompras.component.html',
-  styleUrl: './historialdecompras.component.css'
+ styleUrls: ['./historialdecompras.component.css'] 
 })
-export class HistorialdecomprasComponent {
+export class HistorialdecomprasComponent implements OnInit {
+  // producto: Product = new Product();
+  // detalle: Detalle = new Detalle();
+  getDetalle: Detalle[] = [];
+  getProducto: Product[] = [];
 
+  constructor(private detalleService: DetalleService, private productoService: ProductoService) { }
+
+  ngOnInit(): void {
+    // Suscripción al Observable devuelto por getDetalle
+    this.detalleService.getDetalle().subscribe((data: Detalle[]) => {
+      this.getDetalle = data;
+    });
+
+    // // Suscripción al Observable devuelto por getProducto
+    // this.productoService.getProducto().subscribe((data: any) => {
+    //   this.getProducto = data;
+    // });
+  }
 }
