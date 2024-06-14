@@ -86,7 +86,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'abm_ispc',
         'USER': 'root',
-        'PASSWORD': '',
+        'PASSWORD': 'MYSkitsune824',
         'HOST': 'localhost',
         'PORT': '3306',
         'OPTIONS': {
@@ -155,6 +155,14 @@ CORS_ORIGIN_WHITELIST = [
 ]
 
 CORS_ALLOW_CREDENTIALS = True
+
+CORS_ALLOW_HEADERS = [
+    'content-type',
+    'authorization',
+    'autentification',  
+    'x-requested-with',
+    
+]
 
 # Permitir métodos específicos
 CORS_ALLOW_METHODS = [
