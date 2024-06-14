@@ -56,8 +56,8 @@ export class LogService {
     if (error.status === 0) {
       console.error("Se ha producido un error", error.error);
     } else {
-      console.error("backend retoro el código de estado", error.status, error.error);
+      console.error("backend retorno el código de estado", error.status, error.error);
     }
-    return throwError(() => new Error("Algo falló, por favor intente nuevamente"));
+    return throwError(() => new Error("Email o Contraseña no son válidos"));
   }
 }
