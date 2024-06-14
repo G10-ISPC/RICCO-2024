@@ -7,9 +7,7 @@ from rest_framework.views import APIView
 from rest_framework.permissions import AllowAny
 from rest_framework.authtoken.models import Token
 from rest_framework import viewsets
-# from rest_framework.authtoken.serializers import AuthTokenSerializer
-
-# from .permissions import IsAdminOrReadOnly
+from rest_framework.authtoken.serializers import AuthTokenSerializer
 
 from .serializers import UsuarioSerializers
 from .serializers import RegistroSerializers
@@ -29,7 +27,6 @@ from .models import Barrio
 from .models import Rol
 from .models import Producto
 from .models import Direccion
-#from .models import Usuario
 from .models import Compra
 from .models import Detalle
 from .models import Permiso
@@ -43,10 +40,12 @@ class LoginView(APIView):
         email = request.data.get('email', None)
         password = request.data.get('password', None)
         usuario = authenticate(request, username=email, password=password)
+        isAdmin = request.user.is_staff if request.user.is_authenticated else False
         if usuario:
             login(request, usuario)
+            isAdmin = usuario.is_staff
             token, created = Token.objects.get_or_create(user=usuario)
-            return Response({'token': token.key, 'user': UsuarioSerializers(usuario).data}, status=status.HTTP_200_OK)
+            return Response({'token': token.key, 'user': UsuarioSerializers(usuario).data, 'is_staff': isAdmin}, status=status.HTTP_200_OK)
         else:
             return Response({'error': 'Credenciales de inicio de sesión incorrectas'}, status=status.HTTP_400_BAD_REQUEST)
 
@@ -97,10 +96,6 @@ class ProductoViewSet(viewsets.ModelViewSet):
 class DireccionViewSet(viewsets.ModelViewSet):
     queryset=Direccion.objects.all()
     serializer_class= DireccionSerializer
-
-# class UsuarioViewSet(viewsets.ModelViewSet):
-#  queryset=Usuario.objects.all()
-#  serializer_class= UsuarioSerializer
 
 class CompraViewSet(viewsets.ModelViewSet):
     queryset=Compra.objects.all()

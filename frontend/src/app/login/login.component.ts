@@ -26,8 +26,7 @@ export class LoginComponent {
     });
   }
 
-  //ngOnInit(): void {}
-
+ 
   get email()
   {
     return this.loginForm.get('email');
@@ -42,9 +41,7 @@ export class LoginComponent {
     if (this.loginForm.valid) {
       const credentials: LogRequest = this.loginForm.value;
       this.logService.login(credentials).subscribe({
-    // if(this.loginForm.valid){
-    //   this.logService.login(this.loginForm.value as LogRequest).subscribe({
-        next: (userData) =>{
+          next: (userData) =>{
           console.log("usuario autenticado.",userData);
           this.router.navigateByUrl('/home');
           this.loginForm.reset(); 

@@ -1,9 +1,7 @@
 from rest_framework import serializers
-
 from django.contrib.auth import get_user_model
 from rest_framework.validators import UniqueValidator
 from django.contrib.auth.password_validation import validate_password
-
 from .models import CustomUser
 from .models import Localidad
 from .models import Barrio
@@ -36,7 +34,7 @@ class RegistroSerializers(serializers.ModelSerializer):
 
     class Meta:
         model = CustomUser
-        fields = ('username', 'password', 'password2', 'email', 'first_name', 'last_name', 'telefono')
+        fields = ('username', 'password', 'password2', 'email', 'first_name', 'last_name', 'telefono', 'is_staff')
 
     def validate(self, attrs):
         if attrs['password'] != attrs['password2']:
@@ -55,23 +53,7 @@ class RegistroSerializers(serializers.ModelSerializer):
         user.save()
         return user
     
-  #  class Meta:
- #       model = CustomUser
-#        fields = ('id', 'username', 'email', 'password', 'first_name', #'last_name', 'telefono')
-  #      extra_kwargs = {'password': {'write_only': True}}
-
- #   def create(self, validated_data):
-#        user = CustomUser.objects.create_user(
-         #   username=validated_data['username'],
-        #    email=validated_data['email'],
-       #      last_name=validated_data.get('last_name', ''),
-     #       telefono=validated_data.get('telefono', '')
-    #    )
-   #     return user
-
-  #  def validate_password(self, value):
- #       return make_password(value)       
-    
+      
 class LocalidadSerializer(serializers.ModelSerializer):
     class Meta:
         model= Localidad
@@ -104,8 +86,6 @@ class CompraSerializer(serializers.ModelSerializer):
                 
     
 class DetalleSerializer(serializers.ModelSerializer):
-    compra=CompraSerializer('fecha')
-    producto=ProductoSerializer('nombre_producto')    
     class Meta:
         model= Detalle
         fields='__all__' 
