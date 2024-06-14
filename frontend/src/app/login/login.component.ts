@@ -49,6 +49,7 @@ export class LoginComponent {
         error: (error) =>{
           console.error("Error en el inicio de sesión.",error);
           this.loginError=error.message || "Error en el inicio de sesión.";
+          this.loginForm.reset(); 
         },
         complete: () => {
           console.info("Login completo");
