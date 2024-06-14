@@ -55,6 +55,14 @@ CORS_ALLOWED_ORIGINS = [
     'http://localhost:4200',
 ]
 
+CORS_ALLOW_HEADERS = [
+    'content-type',
+    'authorization',
+    'autentification', 
+    'x-requested-with',
+    
+]
+
 ROOT_URLCONF = 'abm_ispc.urls'
 
 TEMPLATES = [
