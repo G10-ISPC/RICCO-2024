@@ -82,17 +82,17 @@ WSGI_APPLICATION = 'ricco.wsgi.application'
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 DATABASES = {
-'default': {
-'ENGINE': 'django.db.backends.mysql',
-'NAME': 'abm_ispc',
-'USER': 'root',
-'PASSWORD': '',
-'HOST': 'localhost',
-'PORT': '3306',
-'OPTIONS': {
-'sql_mode': 'traditional',
-}
-}
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'abm_ispc',
+        'USER': 'root',
+        'PASSWORD': '',
+        'HOST': 'localhost',
+        'PORT': '3306',
+        'OPTIONS': {
+            'sql_mode': 'traditional',
+        }
+    }
 }
 
 # Password validation
