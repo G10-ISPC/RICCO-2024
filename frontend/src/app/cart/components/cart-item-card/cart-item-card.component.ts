@@ -9,7 +9,8 @@ import { DecimalPipe } from '@angular/common';
     standalone: true,
     templateUrl: './cart-item-card.component.html',
     styleUrl: './cart-item-card.component.css',
-    imports: [AmountAdjusterComponent, CartComponent, DecimalPipe]
+    imports: [DecimalPipe, AmountAdjusterComponent, CartComponent]
+    // CartComponent, 
 })
 
 export class CartItemCardComponent {
@@ -18,15 +19,14 @@ export class CartItemCardComponent {
   @Output() itemQuantityUpdate = new EventEmitter<number>();
   @Output() removeItem = new EventEmitter<void>();
   
-        // CAMBIAR CANTIDAD  EN TARJETA
   onQuantityChange(quantity: number) {
     this.itemQuantityUpdate.next(quantity);
   }
-        // ELIMINAR  EN TARJETA
+
   onRemoveItem() {
     this.removeItem.next();
   }
-  
+
 }
 
 

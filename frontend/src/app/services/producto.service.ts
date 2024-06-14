@@ -9,7 +9,7 @@ import { Product } from '../data/products.data'
 })
 export class ProductoService {
 
-  url="http://127.0.0.1:8000/api/v1producto/"; 
+  url="api/producto/"; 
   
   constructor(private http:HttpClient) { 
 
@@ -21,7 +21,7 @@ export class ProductoService {
   }
   
   deleteData(id: string): Observable<any> {
-    const urldel = `${this.url}${id}/`; 
+    const urldel = `http://127.0.0.1:8000/${this.url}${id}/`; 
     return this.http.delete(urldel);
   }
 
@@ -31,6 +31,9 @@ export class ProductoService {
      return this.http.post(this.url, product)
     }
 
+  getProducto():Observable<Product[]>{
+      return this.http.get<Product[]>(this.url);
+     }
    
   
 }
