@@ -10,18 +10,18 @@ import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HistorialdecomprasComponent } from './dashboard/historialdecompras/historialdecompras.component';
 import { CartComponent } from './cart/cart.component';
-
+import { isLoggedInGuard } from './guards/is-logged-in.guard';
 
 export const routes: Routes = [
     { path: "", redirectTo: "/home", pathMatch: "full" },
     { path: "login", component: LoginComponent },
-    { path: 'productos', component: ProductosComponent },
+    { path: 'productos', component: ProductosComponent, canActivate:[isLoggedInGuard] },
     { path: 'home', component: HomeComponent },
     { path: 'nosotros', component: NosotrosComponent },
     { path: 'contacto', component: ContactoComponent },
-    { path: 'admin', component: AdminComponent},
+    { path: 'admin', component: AdminComponent, canActivate:[isLoggedInGuard]  },
     { path: 'registro', component: RegistroComponent },
-    { path: 'dashboard', component: DashboardComponent },
+    { path: 'dashboard', component: DashboardComponent, canActivate:[isLoggedInGuard]  },
     { path: 'historialdecompras', component: HistorialdecomprasComponent },
     { path: 'cart', component: CartComponent },
     { path: '**', component: Error404Component },
