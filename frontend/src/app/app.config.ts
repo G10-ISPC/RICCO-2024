@@ -13,7 +13,7 @@ export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes), importProvidersFrom(HttpClientModule),
     provideHttpClient(withInterceptors([injectToken])),
     {
-      provide:HTTP_INTERCEPTORS, useClass:HttpErrorInterceptor, multi: true,deps:[LogService]
+      provide:HTTP_INTERCEPTORS, useClass:HttpErrorInterceptor, multi: true,deps:[]
     }
   ]
 

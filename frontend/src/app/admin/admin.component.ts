@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, signal } from '@angular/core';
 import { Product } from '../data/products.data'
 import { ProductoService } from '../services/producto.service';
 import { CommonModule } from '@angular/common';
@@ -32,7 +32,7 @@ export class AdminComponent {
     )
   }
 
-
+public products=signal<any[]>([])
 
   ngOnInit(): void {
     this.llenarData();
@@ -40,16 +40,18 @@ export class AdminComponent {
 
   llenarData(): void {
     this.productoService.getData().subscribe(data => {
-      this.data = data;
+      this.products.set(data)//
       console.log(this.data)
     })
   }
 
-  borrarData(id: string): void {
+  borrarData(event: any, id: string): void {
+    event.preventDefault();
     this.productoService.deleteData(id).subscribe(
       () => {
         console.log('Producto eliminado correctamente');
-        window.location.reload();
+        //window.location.reload(); hacer logica para actualizar lista
+        this.products.update(products=> products.filter((product:any)=>product.id_producto!==id))
         
       },
       error => {
@@ -61,29 +63,33 @@ export class AdminComponent {
   
 
   onEnviar(event: Event): void {
-    
+   // event.preventDefault();
+
     if (this.form.valid) {
       console.log("Enviando al servidor...");
       this.productoService.createProduct(this.form.value as Product).subscribe(
-        data => {
-          console.log(data.id);
-          console.log(this.form.value as Product)
-          window.location.reload();
-          if (data.id > 0) {
-            console.log("Se ha creado exitosamente");
-
+        response => {
+          console.log("Respuesta del servidor:", response);
+          if (response && response.id_producto) {
+            console.log("Producto creado exitosamente. ID:", response.id_producto);
+            this.form.get('nombre_producto')?.setValue('');
+        this.form.get('imagenUrl')?.setValue('');
+        this.form.get('descripcion')?.setValue('');
+        this.form.get('precio')?.setValue('');
+            this.llenarData();        
+            // this.llenarData(); // Ejemplo: actualizar la lista de productos después de crear uno nuevo
+          } else {
+            console.error("No se recibió un ID válido del producto creado");
           }
-        })
-    }
-    else {
-      console.log("error");
+        },
+        error => {
+          console.error('Error al crear el producto', error);
+          // Maneja el error apropiadamente, por ejemplo, mostrando un mensaje de error al usuario
+        }
+      );
+    } else {
+      console.log("Formulario inválido");
+      // Maneja el caso donde el formulario no es válido
     }
   }
-
-
-
 }
-
-
-
-

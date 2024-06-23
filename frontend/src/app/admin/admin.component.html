@@ -48,14 +48,14 @@
                 </thead>
                 <tbody  id="productos-list">
                   
-                  <tr *ngFor="let producto of data">
+                  <tr *ngFor="let producto of products()">
                     <td id="nombre_producto">{{producto.nombre_producto}}</td>
                     <td><img src="" height="50"  alt="foto de hamburguesa" id="foto2">{{producto.imageUrl}}</td>
                     <td id="descripcion">{{producto.descripcion}}</td>
                     <td id="precio">{{producto.precio}}</td>
                     <td>
                         <a class="edit btn btn-sm" title="Editar" id="edit1" href="#"><i class="fa-solid fa-pencil"></i></a>
-                        <a (click)="borrarData(producto.id_producto)" class="delete btn btn-sm " title="Eliminar" id="delete1" href="#"><i class="fa-solid fa-trash"></i></a>
+                       <!----> <a role="button" (click)="borrarData($event, producto.id_producto)" class="delete btn btn-sm " title="Eliminar" id="delete1" href="#"><i class="fa-solid fa-trash"></i></a> 
                     </td>
                   </tr>
                 
