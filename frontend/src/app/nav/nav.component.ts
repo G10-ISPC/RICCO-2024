@@ -3,6 +3,7 @@ import { Router, RouterLink } from '@angular/router';
 import { LogService } from '../services/log.service';
 import { CommonModule } from '@angular/common';
 import { Observable } from 'rxjs';
+import { __values } from 'tslib';
 
 @Component({
   selector: 'app-nav',
@@ -12,13 +13,14 @@ import { Observable } from 'rxjs';
   styleUrl: './nav.component.css'
 })
 export class NavComponent {
-  isAdmin$!: Observable<boolean>; 
+  public readonly isAdmin$: Observable<boolean>=this.logService.isAdmin;//
 constructor (private logService: LogService, 
   private route: Router
 ){
-  this.logService.isAdmin.subscribe(isAdmin => { 
-    this.isAdmin$ = this.logService.isAdmin;
-  });
+  this.isAdmin$.subscribe( __values=> { //
+    console.log (__values) //
+  }
+  )
 }
 readonly isUserLogin$=this.logService.isUserLogin();
 logout():void{
