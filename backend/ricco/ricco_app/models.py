@@ -20,7 +20,7 @@ class Localidad(models.Model):
 class Barrio(models.Model):
     id_barrio = models.AutoField(primary_key=True)
     nombre_barrio = models.CharField(max_length=50, blank=False, default='')
-    localidad = models.ForeignKey(Localidad, to_field='id_localidad', on_delete=models.CASCADE, related_name="barrio", default="") 
+    localidad = models.ForeignKey(Localidad, to_field='id_localidad', on_delete=models.SET_NULL, null=True, blank=True, related_name="barrio", default="") 
 
     class Meta:
         db_table = 'barrio'
@@ -63,7 +63,7 @@ class Direccion(models.Model):
     id_direccion = models.AutoField(primary_key=True)
     calle = models.CharField(max_length=100, blank=False, default='')
     numero = models.DecimalField(max_digits=10, decimal_places=2, blank=False, default=0.0)
-    barrio = models.ForeignKey(Barrio, to_field='id_barrio', on_delete=models.CASCADE, related_name="direccion", default="")
+    barrio = models.ForeignKey(Barrio, to_field='id_barrio',  on_delete=models.SET_NULL, null=True, blank=True, related_name="direccion", default="")
 
     class Meta:
         db_table = 'direccion'
@@ -84,7 +84,7 @@ class CustomUserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, email, username, password=None, **extra_fields):
+    def create_superuser(self, email, password=None, **extra_fields):
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
 
@@ -93,9 +93,11 @@ class CustomUserManager(BaseUserManager):
         if extra_fields.get('is_superuser') is not True:
             raise ValueError('Superuser must have is_superuser=True.')
 
-        return self.create_user(email, username, password, **extra_fields)
+        return self.create_user(email, password, **extra_fields)
 
 class CustomUser(AbstractUser):
+    username = models.CharField(max_length=150, unique=True, blank=True, null=True)
+    email = models.EmailField(max_length=150, unique=True)
     email = models.EmailField(max_length=150, unique=True)
     telefono = models.CharField(max_length=50, blank=False, null=True)  
     direccion = models.ForeignKey(Direccion, to_field='id_direccion', on_delete=models.CASCADE, blank=True, null=True, related_name="usuario", default="")
@@ -104,7 +106,7 @@ class CustomUser(AbstractUser):
     objects = CustomUserManager()
 
     USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = ["username"]
+    REQUIRED_FIELDS = []
 
     class Meta:
         db_table = 'usuario'
