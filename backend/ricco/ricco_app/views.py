@@ -7,7 +7,7 @@ from rest_framework.views import APIView
 from rest_framework.permissions import AllowAny
 from rest_framework.authtoken.models import Token
 from rest_framework import viewsets
-from rest_framework.authtoken.serializers import AuthTokenSerializer
+from django.contrib.auth import get_user_model
 
 from .serializers import UsuarioSerializers
 from .serializers import RegistroSerializers
@@ -22,7 +22,7 @@ from .serializers import DetalleSerializer
 from .serializers import Rol_PermisoSerializer
 from .serializers import PedidoSerializer
 
-from .models import CustomUser, Localidad
+from .models import Localidad
 from .models import Barrio
 from .models import Rol
 from .models import Producto
@@ -60,7 +60,7 @@ class LogoutView(APIView):
     
 
 class RegistroView(generics.CreateAPIView):
-    queryset = CustomUser.objects.all()
+    queryset = get_user_model().objects.all()
     serializer_class = RegistroSerializers
     permission_classes = [AllowAny]
 

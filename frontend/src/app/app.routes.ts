@@ -1,16 +1,16 @@
 import { Routes } from '@angular/router';
-import { ProductosComponent } from './productos/productos.component';
-import { HomeComponent } from './home/home.component';
-import { NosotrosComponent } from './nosotros/nosotros.component';
-import { ContactoComponent } from './contacto/contacto.component';
-import { Error404Component } from './error404/error404.component';
-import { AdminComponent } from './admin/admin.component';
-import { RegistroComponent } from './registro/registro.component';
-import { LoginComponent } from './login/login.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { HistorialdecomprasComponent } from './dashboard/historialdecompras/historialdecompras.component';
-import { CartComponent } from './cart/cart.component';
-import { isLoggedInGuard } from './guards/is-logged-in.guard';
+import { ProductosComponent } from './pages/productos/productos.component';
+import { HomeComponent } from './pages/home/home.component';
+import { NosotrosComponent } from './pages/nosotros/nosotros.component';
+import { ContactoComponent } from './pages/contacto/contacto.component';
+import { Error404Component } from './pages/error404/error404.component';
+import { AdminComponent } from './pages/admin/admin.component';
+import { RegistroComponent } from './auth/registro/registro.component';
+import { LoginComponent } from './auth/login/login.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { HistorialdecomprasComponent } from './pages/dashboard/historialdecompras/historialdecompras.component';
+import { CartComponent } from './pages/cart/cart.component';
+import { isLoggedInGuard } from './core/guards/is-logged-in.guard';
 
 export const routes: Routes = [
     { path: "", redirectTo: "/home", pathMatch: "full" },

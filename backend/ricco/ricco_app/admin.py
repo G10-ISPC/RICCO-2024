@@ -16,7 +16,21 @@ from .models import Pedido
 # Register your models here.
 @admin.register(get_user_model())
 class CustomUserAdmin(UserAdmin):
-    pass
+    fieldsets = (
+        (None, {'fields': ('email', 'password')}),
+        ('Personal info', {'fields': ('first_name', 'last_name', 'telefono', 'direccion')}),
+        ('Permissions', {'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')}),
+        ('Important dates', {'fields': ('last_login', 'date_joined')}),
+    )
+    add_fieldsets = (
+        (None, {
+            'classes': ('wide',),
+            'fields': ('email', 'password1', 'password2'),
+        }),
+    )
+    list_display = ('email', 'first_name', 'last_name', 'is_staff')
+    search_fields = ('email', 'first_name', 'last_name')
+    ordering = ('email',)
 
 class LocalidadAdmin(admin.ModelAdmin):
     list_display =  ('id_localidad', 'nombre_localidad', 'cod_postal')
