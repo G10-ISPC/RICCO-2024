@@ -37,7 +37,7 @@ obtenerDeveloper()
           facebook: 'https://www.facebook.com',
           instagram: 'https://www.instagram.com',
           linkedin: 'https://www.linkedin.com',
-          github: 'https://github.com',
+          github: 'https://github.com/CarlaArevalo',
         },
         
       },

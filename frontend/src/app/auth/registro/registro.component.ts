@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { usuario } from '../../shared/interfaces/usuario';
 import { RegistroService } from '../../core/services/registro.service';
 
@@ -31,7 +31,7 @@ export function passwordMatchValidator(password: string, confirmPassword: string
 @Component({
   selector: 'app-registro',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule, RouterLink],
   templateUrl: './registro.component.html',
   styleUrls: ['./registro.component.css']
 })

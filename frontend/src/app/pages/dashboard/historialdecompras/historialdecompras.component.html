@@ -22,9 +22,9 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let detalle of getDetalle">
-                        <td>{{ detalle.producto.nombre_producto }}</td>
+                        <td>{{ detalle.id_producto }}</td>
                         <td>{{ detalle.cantidad }}</td>
-                        <td>{{ detalle.compra.fecha }}</td>
+                        <td>{{ detalle.compra?.fecha || 'Fecha no disponible' }}</td>
                         <td>{{ detalle.precio_calculado }}</td>
                     </tr>
                 </tbody>
