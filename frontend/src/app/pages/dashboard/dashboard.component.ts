@@ -3,6 +3,8 @@ import { RouterLink, RouterOutlet } from '@angular/router';
 import { HistorialdecomprasComponent } from './historialdecompras/historialdecompras.component';
 import { ProductosComponent } from '../productos/productos.component';
 
+
+
 @Component({
   selector: 'app-dashboard',
   standalone: true,

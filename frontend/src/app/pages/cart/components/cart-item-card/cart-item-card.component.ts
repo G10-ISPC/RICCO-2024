@@ -2,14 +2,15 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CartItem } from '../../../../core/services/cart.service';
 import { AmountAdjusterComponent } from "../amount-adjuster/amount-adjuster.component";
 import { CartComponent } from '../../cart.component';
-import { DecimalPipe } from '@angular/common';
+import { DecimalFormatPipe } from '../../../../shared/pipes/decimal-format.pipe';
+
 
 @Component({
     selector: 'app-cart-item-card',
     standalone: true,
     templateUrl: './cart-item-card.component.html',
     styleUrl: './cart-item-card.component.css',
-    imports: [DecimalPipe, AmountAdjusterComponent, CartComponent]
+    imports: [DecimalFormatPipe , AmountAdjusterComponent, CartComponent]
     // CartComponent, 
 })
 

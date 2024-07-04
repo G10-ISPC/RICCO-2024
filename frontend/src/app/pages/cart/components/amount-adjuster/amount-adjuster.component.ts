@@ -19,3 +19,4 @@ export class AmountAdjusterComponent{
     if (this.quantity > 1) this.quantityChange.next(this.quantity - 1);
   }
 }
+

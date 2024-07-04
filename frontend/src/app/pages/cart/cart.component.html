@@ -9,11 +9,11 @@
                     <strong>{{count() === 1 ? count() + " producto" : count() + " productos"}}</strong>
                 </div>  
                 <div class="items-card-content">
-                    @for (item of items(); track item.id) {
+                    @for (item of items(); track item.id_producto) {
                         <app-cart-item-card
                             [item]="item"
-                            (itemQuantityUpdate)="onItemQuantityUpdate($event, item.id)"
-                            (removeItem)="onRemoveItem(item.id)"
+                            (itemQuantityUpdate)="onItemQuantityUpdate($event, item.id_producto)"
+                            (removeItem)="onRemoveItem(item.id_producto)"
                                                 
                         ></app-cart-item-card>
                     }
@@ -21,7 +21,7 @@
             </div>
                         <!--PAGAR-->
             <div class="purchase-container shadow">
-                <button class="purchase-button"> <strong>PAGAR</strong> </button>
+                <button class="purchase-button"> <a routerLink="/pago.sim"><strong>PAGAR</strong> </a></button>
                 <div class="total-price">
                     <div> <strong>Total</strong> </div>
                     <div> <strong>${{ total() }}</strong> </div>

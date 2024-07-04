@@ -10,10 +10,18 @@ export class CartService {
     total: 0,
   });
 
+  clearCart() {
+    this.cart.update(() => ({
+      items: [],
+      count: 0,
+      total: 0
+    }));
+  }
+
   constructor() {}
 
   addItem(item: CartItem) {
-    const itemObj = this.cart().items.find((t) => t.id === item.id);
+    const itemObj = this.cart().items.find((t) => t.id_producto === item.id_producto);
     if (itemObj) {
       this.increaseItem(itemObj);
     } else {
@@ -21,7 +29,7 @@ export class CartService {
         ...prevCart,
         items: [...prevCart.items, item],
         count: prevCart.count + 1,
-        total: prevCart.total + item.price,
+        total: prevCart.total + item.precio,
       }));
     }
   }
@@ -32,10 +40,10 @@ export class CartService {
         ...prevCart,
         items: [...prevCart.items],
       };
-      const itemObj = newCart.items.find((t) => t.id === item.id);
+      const itemObj = newCart.items.find((t) => t.id_producto === item.id_producto);
       itemObj!.quantity = itemObj!.quantity + 1;
       newCart.count++;
-      newCart.total += itemObj!.price;
+      newCart.total += itemObj!.precio;
       return newCart;
     });
   }
@@ -46,10 +54,10 @@ export class CartService {
         ...prevCart,
         items: [...prevCart.items],
       };
-      const itemObj = newCart.items.find((t) => t.id === item.id);
+      const itemObj = newCart.items.find((t) => t.id_producto === item.id_producto);
       itemObj!.quantity = itemObj!.quantity - 1;
       newCart.count--;
-      newCart.total -= itemObj!.price;
+      newCart.total -= itemObj!.precio;
       return newCart;
     });
   }
@@ -58,21 +66,21 @@ export class CartService {
     this.cart.update((prevCart) => {
       const newCart = {
         ...prevCart,
-        items: [...prevCart.items.filter((t) => t.id !== item.id)],
+        items: [...prevCart.items.filter((t) => t.id_producto !== item.id_producto)],
       };
-      const itemObj = prevCart.items.find((t) => t.id === item.id);
+      const itemObj = prevCart.items.find((t) => t.id_producto === item.id_producto);
       newCart.count -= itemObj!.quantity;
-      newCart.total -= itemObj!.price * itemObj!.quantity;
+      newCart.total -= itemObj!.precio * itemObj!.quantity;
       return newCart;
     });
   }
 }
 
 export interface CartItem {
-  id: string;
-  name: string;
-  imageUrl: string;
-  price: number;
+  id_producto: string;
+  nombre_producto: string;
+  imgUrl: string;
+  precio: number;
   quantity: number;
 }
 
@@ -81,4 +89,7 @@ export interface Cart {
   count: number;
   total: number;
 }
+
+
+
 
