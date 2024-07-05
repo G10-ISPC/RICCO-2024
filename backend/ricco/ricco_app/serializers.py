@@ -38,27 +38,18 @@ class BarrioSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Barrio
-        fields = ('nombre_barrio', 'localidad')
+        fields = ('nombre_barrio')
 
 
 class DireccionSerializer(serializers.ModelSerializer):
-    barrio = BarrioSerializer(required=True)
 
     class Meta:
         model = Direccion
-        fields = ('calle', 'numero', 'barrio')
-
-    def create(self, validated_data):
-        barrio_data = validated_data.pop('barrio')
-        localidad_data = barrio_data.pop('localidad')
-
-        localidad_instance = Localidad.objects.create(**localidad_data)
-        barrio_instance = Barrio.objects.create(
-            localidad=localidad_instance, **barrio_data)
-        direccion_instance = Direccion.objects.create(
-            barrio=barrio_instance, **validated_data)
-
-        return direccion_instance
+        fields = ('calle', 'numero')
+        extra_kwargs = {
+            'barrio': {'required': False, 'allow_null': True},
+            
+        }
 
 
 class RegistroSerializers(serializers.ModelSerializer):
@@ -73,7 +64,7 @@ class RegistroSerializers(serializers.ModelSerializer):
 
     class Meta:
         model = CustomUser
-        fields = ('username', 'password', 'password2', 'email',
+        fields = ('password', 'password2', 'email',
                   'first_name', 'last_name', 'telefono', 'direccion', 'is_staff')
 
     def validate(self, attrs):
@@ -84,17 +75,11 @@ class RegistroSerializers(serializers.ModelSerializer):
 
     def create(self, validated_data):
         direccion_data = validated_data.pop('direccion')
-        barrio_data = direccion_data.pop('barrio')
-        localidad_data = barrio_data.pop('localidad')
+       
+        direccion_instance = Direccion.objects.create(**direccion_data)
 
-        localidad_instance = Localidad.objects.create(**localidad_data)
-        barrio_instance = Barrio.objects.create(
-            localidad=localidad_instance, **barrio_data)
-        direccion_instance = Direccion.objects.create(
-            barrio=barrio_instance, **direccion_data)
-
-        user = CustomUser.objects.create(
-            username=validated_data['username'],
+        user = get_user_model().objects.create(
+         
             email=validated_data['email'],
             first_name=validated_data['first_name'],
             last_name=validated_data['last_name'],

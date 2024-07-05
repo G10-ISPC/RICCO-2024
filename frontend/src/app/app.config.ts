@@ -3,9 +3,9 @@ import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
 import { HTTP_INTERCEPTORS, HttpClientModule, provideHttpClient, withInterceptors } from '@angular/common/http';
-import { injectToken } from './interceptors/auth-interceptor';
-import { HttpErrorInterceptor } from './interceptors/errors-interceptor';
-import { LogService } from './services/log.service';
+import { injectToken } from './core/interceptors/auth-interceptor';
+import { HttpErrorInterceptor } from './core/interceptors/errors-interceptor';
+import { LogService } from './core/services/log.service';
 
 
 
@@ -13,7 +13,7 @@ export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes), importProvidersFrom(HttpClientModule),
     provideHttpClient(withInterceptors([injectToken])),
     {
-      provide:HTTP_INTERCEPTORS, useClass:HttpErrorInterceptor, multi: true,deps:[LogService]
+      provide:HTTP_INTERCEPTORS, useClass:HttpErrorInterceptor, multi: true,deps:[]
     }
   ]
 
