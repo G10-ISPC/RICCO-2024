@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser, BaseUserManager
+from django.utils.translation import gettext_lazy as _
 
 # Create your models here.    
 class Localidad(models.Model):
@@ -14,7 +15,7 @@ class Localidad(models.Model):
         verbose_name_plural = 'Localidades'
 
     def __str__(self):
-        return str(self.nombre_localidad)
+        return str(self.id_localidad)
     
 
 class Barrio(models.Model):
@@ -28,7 +29,7 @@ class Barrio(models.Model):
         verbose_name_plural = 'Barrios'
 
     def __str__(self):
-        return str(self.nombre_barrio) 
+        return str(self.id_barrio) 
     
     
 class Rol(models.Model):
@@ -41,7 +42,7 @@ class Rol(models.Model):
         verbose_name_plural = 'Roles'
 
     def __str__(self):
-        return str(self.nombre_rol) 
+        return str(self.id_rol) 
     
     
 class Producto(models.Model):  
@@ -56,7 +57,7 @@ class Producto(models.Model):
         verbose_name_plural = 'Productos'
 
     def __str__(self):
-        return str(self.nombre_producto)
+        return str(self.id_producto)
     
     
 class Direccion(models.Model):  
@@ -74,10 +75,11 @@ class Direccion(models.Model):
         return f"{self.calle}, {self.numero}"
     
 
+
 class CustomUserManager(BaseUserManager):
-    def create_user(self, email, username, password=None, **extra_fields):
+    def create_user(self, email, username=None, password=None, **extra_fields):
         if not email:
-            raise ValueError('The Email field must be set')
+            raise ValueError(_('The Email field must be set'))
         email = self.normalize_email(email)
         user = self.model(email=email, username=username, **extra_fields)
         user.set_password(password)
@@ -89,11 +91,33 @@ class CustomUserManager(BaseUserManager):
         extra_fields.setdefault('is_superuser', True)
 
         if extra_fields.get('is_staff') is not True:
-            raise ValueError('Superuser must have is_staff=True.')
+            raise ValueError(_('Superuser must have is_staff=True.'))
         if extra_fields.get('is_superuser') is not True:
-            raise ValueError('Superuser must have is_superuser=True.')
+            raise ValueError(_('Superuser must have is_superuser=True.'))
 
-        return self.create_user(email, password, **extra_fields)
+        return self.create_user(email, password=password, **extra_fields)    
+    
+
+# class CustomUserManager(BaseUserManager):
+#     def create_user(self, email, username, password=None, **extra_fields):
+#         if not email:
+#             raise ValueError('The Email field must be set')
+#         email = self.normalize_email(email)
+#         user = self.model(email=email, username=username, **extra_fields)
+#         user.set_password(password)
+#         user.save(using=self._db)
+#         return user
+
+#     def create_superuser(self, email, password=None, **extra_fields):
+#         extra_fields.setdefault('is_staff', True)
+#         extra_fields.setdefault('is_superuser', True)
+
+#         if extra_fields.get('is_staff') is not True:
+#             raise ValueError('Superuser must have is_staff=True.')
+#         if extra_fields.get('is_superuser') is not True:
+#             raise ValueError('Superuser must have is_superuser=True.')
+
+#         return self.create_user(email, password, **extra_fields)
 
 class CustomUser(AbstractUser):
     username = models.CharField(max_length=150, unique=True, blank=True, null=True)
@@ -195,4 +219,8 @@ class Pedido(models.Model):
         verbose_name_plural = 'Pedidos'
         
     def __str__(self):
-        return str(self.id_pedido)                                     
+        return str(self.id_pedido)     
+    
+    
+    
+                                    

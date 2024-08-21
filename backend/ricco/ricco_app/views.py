@@ -8,6 +8,7 @@ from rest_framework.permissions import AllowAny
 from rest_framework.authtoken.models import Token
 from rest_framework import viewsets
 from django.contrib.auth import get_user_model
+from rest_framework_simplejwt.tokens import RefreshToken
 
 from .serializers import UsuarioSerializers
 from .serializers import RegistroSerializers
@@ -40,18 +41,30 @@ class LoginView(APIView):
         email = request.data.get('email', None)
         password = request.data.get('password', None)
         usuario = authenticate(request, username=email, password=password)
-        isAdmin = request.user.is_staff if request.user.is_authenticated else False
+
         if usuario:
             login(request, usuario)
             isAdmin = usuario.is_staff
-            token, created = Token.objects.get_or_create(user=usuario)
-            return Response({'token': token.key, 'user': UsuarioSerializers(usuario).data, 'is_staff': isAdmin}, status=status.HTTP_200_OK)
+            tokens = self.get_tokens_for_user(usuario)
+            user_data = UsuarioSerializers(usuario).data
+            return Response({
+                'token': tokens['access'],
+                'refresh': tokens['refresh'],
+                'user': user_data,
+                'is_staff': isAdmin
+            }, status=status.HTTP_200_OK)
         else:
             return Response({'error': 'Credenciales de inicio de sesión incorrectas'}, status=status.HTTP_400_BAD_REQUEST)
 
+    def get_tokens_for_user(self, user):
+        refresh = RefreshToken.for_user(user)
+        return {
+            'refresh': str(refresh),
+            'access': str(refresh.access_token),
+        }
+
     def get(self, request):
         return Response(data={'message': 'GET request processed successfully'})
-
 class LogoutView(APIView):
     @method_decorator(csrf_exempt)
     def post(self, request):
@@ -115,4 +128,7 @@ class Rol_PermisoViewSet(viewsets.ModelViewSet):
        
 class PedidoViewSet(viewsets.ModelViewSet):
     queryset=Pedido.objects.all()
-    serializer_class= PedidoSerializer        
+    serializer_class= PedidoSerializer  
+    
+    
+          

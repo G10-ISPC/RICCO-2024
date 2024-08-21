@@ -29,7 +29,7 @@ export class HistorialdecomprasComponent implements OnInit {
   }
 
   obtenerDetalles(): void {
-    this.detalleService.getDetalle().subscribe((data: Detalle[]) => {  // Cambiado a Detalle[]
+    this.detalleService.getDetalle().subscribe((data: Detalle[]) => {  
       this.getDetalle = data;
     }, (error) => {
       console.error('Error al obtener los detalles:', error);
