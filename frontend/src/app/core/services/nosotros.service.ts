@@ -126,6 +126,20 @@ obtenerDeveloper()
         
       },
 
+      {
+        id: 9,
+        name: 'Ernesto Agustin Cevasco',
+        fotoUrl: '../assets/img/Ernesto.png',
+        rol: 'Developer Team',
+        redesSociales: {
+          facebook: 'https://www.facebook.com',
+          instagram: 'https://www.instagram.com',
+          linkedin: 'https://www.linkedin.com',
+          github: 'https://github.com/Noobuyer',
+        },
+        
+      },
+
     ];
     return this.developerList;
   }
