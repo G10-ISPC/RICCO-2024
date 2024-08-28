@@ -10,7 +10,7 @@ export interface usuario {
     token?: string;
     direccion: {
         calle: string;
-        numero: string;
+        numero: string;//lo que sigue es para utilizarlo en un futuro creciemiento de la empresa.
         // barrio: {
         //     nombre_barrio: string;
         //     localidad: {
@@ -21,3 +21,7 @@ export interface usuario {
     };
 
 }
+
+
+
+

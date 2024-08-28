@@ -25,7 +25,7 @@ export class ProductsComponent implements OnInit {
       (data: Product[]) => {
         this.products = data.map(producto => {
           if (!producto.id) {
-            producto.id = this.generateUniqueId(); // Generar un ID único si no tiene uno
+            producto.id = this.generateUniqueId(); // Genera un ID único si no tiene uno
           }
           console.log('Tipo y valor de precio:', typeof producto.precio, producto.precio);
           if (typeof producto.precio !== 'number') {

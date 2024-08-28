@@ -103,18 +103,19 @@ class ProductoSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class CompraSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Compra
-        fields = '__all__'
+
 
 
 class DetalleSerializer(serializers.ModelSerializer):
-    compra = CompraSerializer('fecha')
-    producto = ProductoSerializer ('nombre_producto')
     class Meta:
         model = Detalle
         fields = '__all__'
+        
+class CompraSerializer(serializers.ModelSerializer):
+    detalles = DetalleSerializer(many=True, read_only=True)
+    class Meta:
+        model = Compra
+        fields = '__all__'        
 
 
 class PermisoSerializer(serializers.ModelSerializer):
@@ -133,3 +134,5 @@ class PedidoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Pedido
         fields = '__all__'
+
+

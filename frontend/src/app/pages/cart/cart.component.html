@@ -1,3 +1,4 @@
+<!-- TEPLATE DONDE SE VE TODO EL CARRITO Y EL BOTON PARA FINALIZAR LA COMPRA -->
 <div class="container">
 
     @if (count()) {
@@ -19,17 +20,18 @@
                     }
                 </div>
             </div>
-                        <!--PAGAR-->
-            <div class="purchase-container shadow">
-                <button class="purchase-button"> <a routerLink="/pago.sim"><strong>PAGAR</strong> </a></button>
-                <div class="total-price">
-                    <div> <strong>Total</strong> </div>
-                    <div> <strong>${{ total() }}</strong> </div>
-                </div>
-            </div>
-        </main>
-
-        } @else {
-        <div class="empty-card"><h1>El carrito está vacío</h1></div>
-        }
+      <!-- PAGAR -->
+      <div class="purchase-container shadow">
+        <button class="purchase-button">
+          <a routerLink="/pago.sim"><strong>FINALIZAR COMPRA</strong></a>
+        </button>
+        <div class="total-price">
+          <div><strong>Total</strong></div>
+          <div><strong>${{ total() }}</strong></div>
+        </div>
+      </div>
+    </main>
+  } @else {
+    <div class="empty-card"><h1>El carrito está vacío</h1></div>
+  }
 </div>

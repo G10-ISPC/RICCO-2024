@@ -1,4 +1,3 @@
-
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -27,4 +26,11 @@ export class DetalleService {
   eliminarDetalle(id: number): Observable<any> {
     return this.http.delete(`${this.Url}${id}/`);
   }
+
+  agregarDetalle(detalle: Detalle): Observable<Detalle> {
+    return this.http.post<Detalle>(this.Url, detalle);
+  }
+
 }
+
+
