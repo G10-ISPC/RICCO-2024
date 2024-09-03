@@ -3,8 +3,6 @@
 
 
 
-   
-  
 <div class="col-md-12">
     <div class="card">
         <div class="card-header bg-primary text-white">                        
@@ -17,15 +15,17 @@
                         <th>Producto</th>
                         <th>Cantidad</th>
                         <th>Fecha</th>
-                        <th>Precio Pagado</th>
+                        <th>Precio</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let detalle of getDetalle">
-                        <td>{{ detalle.id_producto }}</td>
-                        <td>{{ detalle.cantidad }}</td>
-                        <td>{{ detalle.compra?.fecha || 'Fecha no disponible' }}</td>
-                        <td>{{ detalle.precio_calculado }}</td>
+                    <!-- Combinamos la información en la misma fila -->
+                    <tr *ngFor="let compra of getCompra; let i = index">
+                        <td>{{ compra.descripcion }}</td>
+                        <td>{{ getDetalle[i] ? getDetalle[i].cantidad : 'Cantidad no disponible' }}</td>
+                        <td>{{ compra.fecha || 'Fecha no disponible' }}</td>
+                        <td>{{ getDetalle[i] ? getDetalle[i].precio_calculado : 'Precio no disponible' }}</td>
+
                     </tr>
                 </tbody>
                 <div *ngIf="!getDetalle || getDetalle.length === 0">
@@ -35,4 +35,3 @@
         </div>
     </div>
 </div>
-
