@@ -6,33 +6,50 @@ import { DecimalFormatPipe } from '../../../shared/pipes/decimal-format.pipe';
 import { DetalleService } from '../../../core/services/detalle.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Detalle } from '../../../shared/interfaces/detalle.data';
-import { Product } from '../../../shared/interfaces/products.data';
-import { ProductoService } from '../../../core/services/producto.service';
+import { Compra } from '../../../shared/interfaces/compra';
+import { CompraService } from '../../../core/services/compra.service';
 
 @Component({
   selector: 'app-historialdecompras',
   standalone: true,
-  imports: [AsyncPipe, NgComponentOutlet,DecimalFormatPipe, CommonModule, ReactiveFormsModule ],
+  imports: [AsyncPipe, NgComponentOutlet, DecimalFormatPipe, CommonModule, ReactiveFormsModule],
   templateUrl: './historialdecompras.component.html',
- styleUrls: ['./historialdecompras.component.css'] 
+  styleUrls: ['./historialdecompras.component.css']
 })
 export class HistorialdecomprasComponent implements OnInit {
-  // producto: Product = new Product();
-  // detalle: Detalle = new Detalle();
+[x: string]: any;
   getDetalle: Detalle[] = [];
-  getProducto: Product[] = [];
+  getCompra: Compra[] = [];  // Propiedad para almacenar las compras
 
-  constructor(private detalleService: DetalleService, private productoService: ProductoService) { }
+  constructor(
+    private detalleService: DetalleService,
+    private compraService: CompraService // Inyecta el servicio de compras
+  ) { }
 
   ngOnInit(): void {
     this.obtenerDetalles();
+    this.obtenerCompras(); // Llama al método para cargar las compras
   }
 
   obtenerDetalles(): void {
-    this.detalleService.getDetalle().subscribe((data: Detalle[]) => {  
-      this.getDetalle = data;
-    }, (error) => {
-      console.error('Error al obtener los detalles:', error);
-    });
+    this.detalleService.getDetalle().subscribe(
+      (data: Detalle[]) => {  
+        this.getDetalle = data;
+      },
+      (error) => {
+        console.error('Error al obtener los detalles:', error);
+      }
+    );
+  }
+
+  obtenerCompras(): void {
+    this.compraService.getCompras().subscribe(  // Cambié de `getCompra()` a `getCompras()`
+      (data: Compra[]) => {
+        this.getCompra = data;
+      },
+      (error) => {
+        console.error('Error al obtener las compras:', error);
+      }
+    );
   }
 }

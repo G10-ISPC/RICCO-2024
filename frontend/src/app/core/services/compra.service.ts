@@ -19,6 +19,8 @@ export class CompraService {
     return this.http.post<Compra>(this.Url, compra);
   }
 
+
+
   // Opcional: Obtener todos las compras
   getCompras(): Observable<Compra[]> {
     return this.http.get<Compra[]>(this.Url);
