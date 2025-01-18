@@ -16,13 +16,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from ricco_app import views
 
 
 urlpatterns = [
+    path('', views.bienvenida), #15/01/25
     path('admin/', admin.site.urls),
     # Api routers
     path('api/', include('ricco_app.urls')),
-    # path('api/', include(router.urls)),
-    path('api/', include('rest_framework.urls')),
+   
 
 ]

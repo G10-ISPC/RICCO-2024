@@ -17,16 +17,21 @@ export class LogService {
 
   constructor(private http: HttpClient) { }
 
-  getToken(): string {
-    return localStorage.getItem(this.TOKEN_KEY) ?? '';
+  getToken(): string { //17-01-25
+    const token = localStorage.getItem(this.TOKEN_KEY);
+    console.log('Token recuperado:', token); 
+    return token ?? '';
+    //return localStorage.getItem(this.TOKEN_KEY) ?? '';
+    
   }
 
-  getUserIdFromToken(): number | null {
+  getUserIdFromToken():{id:number | null, username:string | null, first_name: string | null, last_name: string | null}{
     const token = this.getToken();
+    console.log('Token:', token); // Verifica que el token se está obteniendo correctamente
     if (!token) {
       console.error('Token no encontrado');
-      return null;
-    }
+      return { id: null, username: null, first_name:null, last_name:null};
+    }//17-01-25
   
     const payloadBase64 = token.split('.')[1];
     const payloadString = atob(payloadBase64);
@@ -36,10 +41,14 @@ export class LogService {
       console.log('Payload:', payload);
       
       // Asegúrate de que el ID del usuario esté en el campo correcto
-      return payload.user?.id ?? null; // Ajusta según la estructura del payload
+      return { id: payload.user?.id ?? null,
+        username: payload.user?.username ?? null,
+        first_name: payload.first_name ?? null, 
+        last_name: payload.last_name ?? null
+       };
     } catch (e) {
       console.error('Error al parsear el payload del token:', e);
-      return null;
+      return { id: null, username: null,  first_name: null, last_name: null };//17-01-25
     }
   }
 
