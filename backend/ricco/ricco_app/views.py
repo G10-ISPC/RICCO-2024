@@ -34,6 +34,29 @@ from .models import Permiso
 from .models import Rol_Permiso
 from .models import Pedido
 
+from django.http import HttpResponse
+
+def bienvenida (request): #15/01/25
+    message = """
+    <h1>Bienvenido a RICCO BURGUER</h1>
+    <p>Gracias por visitar nuestra aplicación. Aquí puedes acceder a las siguientes secciones:</p>
+    
+    <h2>1. Acceso al Panel de Administración:</h2>
+    <p>Para acceder al panel de administración de Django, ve a <a href="/admin/">/admin/</a>.</p>
+    
+    
+    <h2>2. Acceso a las API:</h2>
+    <p>Para interactuar con las API, puedes acceder a las siguientes rutas:</p>
+    <ul>
+        <li><a href="/api/localidad/">/api/localidad/</a></li>
+        <li><a href="/api/barrio/">/api/barrio/</a></li>
+        <li><a href="/api/rol/">/api/rol/</a></li>
+        <li><a href="/api/producto/">/api/producto/</a></li>
+        <li><a href="/api/direccion/">/api/direccion/</a></li>
+    </ul>
+    <p>Recuerda que estas rutas corresponden a la API de nuestra aplicación.</p>
+    """
+    return HttpResponse(message)
 
 class LoginView(APIView):
     @method_decorator(csrf_exempt)
@@ -58,6 +81,11 @@ class LoginView(APIView):
 
     def get_tokens_for_user(self, user):
         refresh = RefreshToken.for_user(user)
+        refresh['first_name'] = user.first_name #16/01/25
+        refresh['last_name'] = user.last_name
+        access = refresh.access_token 
+        access['first_name'] = user.first_name # Asegura que estos campos se añadan 
+        access['last_name'] = user.last_name
         return {
             'refresh': str(refresh),
             'access': str(refresh.access_token),

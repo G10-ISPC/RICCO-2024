@@ -24,7 +24,7 @@ class UsuarioSerializers(serializers.ModelSerializer):
 
     class Meta:
         model = get_user_model()
-        fields = ('email', 'password')
+        fields = ('id','email', 'password', 'username', 'first_name', 'last_name') #16/1/25)
 
 
 class LocalidadSerializer(serializers.ModelSerializer):

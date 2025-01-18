@@ -1,0 +1,18 @@
+.logo { 
+    width: 40px; /* Ajusta este valor según el tamaño deseado */ 
+    height: auto; /* Mantiene la proporción del logo */
+ }
+
+ .navbar-brand { 
+    display: flex;
+    align-items: center;
+ }
+
+ .me-2 { 
+    margin-right: 0.5rem; /* Ajusta el margen según sea necesario */
+ }
+
+  .icon { 
+    display: inline-block; 
+    vertical-align: middle; /* Alinea verticalmente */ 
+}
