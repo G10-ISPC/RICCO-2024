@@ -1,6 +1,7 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, catchError, tap, throwError } from 'rxjs';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Observable, BehaviorSubject, throwError } from 'rxjs';
+import { tap, catchError } from 'rxjs/operators';
 import { LogRequest } from '../../shared/interfaces/logRequest';
 import { LogResponse } from '../../shared/interfaces/logResponse';
 
@@ -15,40 +16,52 @@ export class LogService {
   );
   private readonly isAdmin$ = new BehaviorSubject<boolean>(false);
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    this.checkAdminStatus();
+  }
 
-  getToken(): string { //17-01-25
+  getToken(): string {
     const token = localStorage.getItem(this.TOKEN_KEY);
     console.log('Token recuperado:', token); 
     return token ?? '';
-    //return localStorage.getItem(this.TOKEN_KEY) ?? '';
-    
   }
 
-  getUserIdFromToken():{id:number | null, username:string | null, first_name: string | null, last_name: string | null}{
+  decodeToken(token: string): any {
+    const payloadBase64 = token.split('.')[1];
+    const payloadString = atob(payloadBase64);
+    return JSON.parse(payloadString);
+  }
+
+  getUserIdFromToken(): { id: number | null, username: string | null, first_name: string | null, last_name: string | null } {
     const token = this.getToken();
     console.log('Token:', token); // Verifica que el token se está obteniendo correctamente
     if (!token) {
       console.error('Token no encontrado');
-      return { id: null, username: null, first_name:null, last_name:null};
-    }//17-01-25
-  
-    const payloadBase64 = token.split('.')[1];
-    const payloadString = atob(payloadBase64);
-    
+      return { id: null, username: null, first_name: null, last_name: null };
+    }
+
     try {
-      const payload = JSON.parse(payloadString);
-      console.log('Payload:', payload);
+      const payload = this.decodeToken(token);
+      console.log('Payload:', JSON.stringify(payload, null, 2));
       
-      // Asegúrate de que el ID del usuario esté en el campo correcto
-      return { id: payload.user?.id ?? null,
-        username: payload.user?.username ?? null,
+      return {
+        id: payload.user_id ?? null,
+        username: payload.username ?? null,
         first_name: payload.first_name ?? null, 
         last_name: payload.last_name ?? null
-       };
+      };
     } catch (e) {
       console.error('Error al parsear el payload del token:', e);
-      return { id: null, username: null,  first_name: null, last_name: null };//17-01-25
+      return { id: null, username: null, first_name: null, last_name: null };
+    }
+  }
+
+  checkAdminStatus() {
+    const token = this.getToken();
+    if (token) {
+      const decodedToken = this.decodeToken(token);
+      console.log('Decoded Token:', decodedToken); // Log adicional para verificar la decodificación
+      this.isAdmin$.next(decodedToken.is_staff);
     }
   }
 
@@ -63,6 +76,7 @@ export class LogService {
         const isAdmin = response.is_staff;
         if (token) {
           localStorage.setItem(this.TOKEN_KEY, token);
+          console.log('Token guardado:', localStorage.getItem(this.TOKEN_KEY));
           this.isUserLogin$.next(true);
           this.isAdmin$.next(isAdmin);
         } else {
@@ -80,6 +94,7 @@ export class LogService {
   logout(): void {
     localStorage.removeItem(this.TOKEN_KEY);
     this.isUserLogin$.next(false);
+    this.isAdmin$.next(false);
   }
 
   private handleError(error: HttpErrorResponse): Observable<never> {
@@ -91,4 +106,3 @@ export class LogService {
     return throwError(() => new Error("Email o Contraseña no son válidos"));
   }
 }
-

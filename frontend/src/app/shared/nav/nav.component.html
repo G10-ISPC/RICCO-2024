@@ -2,7 +2,8 @@
   <div class="container-fluid">
     <a class="nav-link d-flex align-items-center" routerLink="/home">
       <img class="icon" src="../../../assets/img/logo1.ico" alt="Ricco"class="logo me-2">
-      <span *ngIf="isUserLogin$ | async" class="nav-link text-light">{{ firstName }} {{lastName}}!</span> <!--16/01/25, muestra nombre usuario -->
+      <span *ngIf="isUserLogin$ | async" class="nav-link text-light">{{ firstName }} {{lastName}}</span> <!--16/01/25, muestra nombre usuario -->
+      <span *ngIf="isAdmin$ | async" class="nav-link text-light">  - (Admin)</span> <!--13/02/25-->
     </a>
     <button
       class="navbar-toggler"
