@@ -13,13 +13,13 @@ import { __values } from 'tslib';
   styleUrl: './nav.component.css'
 })
 export class NavComponent {
-  public readonly isAdmin$: Observable<boolean>=this.logService.isAdmin;//
+  public readonly isAdmin$: Observable<boolean>=this.logService.isAdmin;
   public username: string | null = null; // 16/01/25
   public firstName: string | null = null; // 16/01/25
   public lastName: string | null = null;// 16/01/25
 constructor (private logService: LogService, 
   private route: Router
-  ){
+){
   this.isAdmin$.subscribe( __values=> { //
     console.log (__values) //
   }

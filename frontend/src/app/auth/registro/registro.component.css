@@ -1,4 +1,5 @@
 
+
 main{
     
     /* background: url("/assets/img/plato.png"); */
@@ -184,4 +185,27 @@ main{
     color: #040404;
 
 }
+
+.success-message {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #060706; /* negro para indicar éxito */
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    z-index: 1000;
+    animation: fadeInOut 5s forwards;
+  }
+  
+  @keyframes fadeInOut {
+    0%, 100% {
+      opacity: 0;
+    }
+    10%, 90% {
+      opacity: 1;
+    }
+  }
 

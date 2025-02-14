@@ -83,9 +83,11 @@ class LoginView(APIView):
         refresh = RefreshToken.for_user(user)
         refresh['first_name'] = user.first_name #16/01/25
         refresh['last_name'] = user.last_name
+        refresh['is_staff'] = user.is_staff #13-02-25
         access = refresh.access_token 
         access['first_name'] = user.first_name # Asegura que estos campos se añadan 
         access['last_name'] = user.last_name
+        access['is_staff']= user.is_staff #13-02-25
         return {
             'refresh': str(refresh),
             'access': str(refresh.access_token),

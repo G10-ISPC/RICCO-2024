@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap');
 
+
 * {
     margin: 0;
     padding: 0;
@@ -216,3 +217,70 @@ main {
     color: #040404;
 
 }
+
+.welcome-message {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #080601; /* Verde para indicar éxito */
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    z-index: 1000;
+    animation: fadeInOut 5s forwards;
+  }
+  
+  @keyframes fadeInOut {
+    0%, 100% {
+      opacity: 0;
+    }
+    10%, 90% {
+      opacity: 1;
+    }
+  }
+
+.input-group {
+    position: relative;
+  }
+  
+  .input-group .input-group-append {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+  
+  .input-group .input-group-text {
+    background: transparent;
+    border: none;
+  }
+  
+  .fas {
+    font-size: 16px;
+  }
+  
+  .welcome-message {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #060706; /* negro para indicar éxito - 13/02/25 */
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    z-index: 1000;
+    animation: fadeInOut 5s forwards;
+  }
+  
+  @keyframes fadeInOut {
+    0%, 100% {
+      opacity: 0;
+    }
+    10%, 90% {
+      opacity: 1;
+    }
+  }
