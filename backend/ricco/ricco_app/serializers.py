@@ -3,17 +3,13 @@ from django.contrib.auth import get_user_model
 from rest_framework.validators import UniqueValidator
 from django.contrib.auth.password_validation import validate_password
 
-from .models import CustomUser
-from .models import Localidad
-from .models import Barrio
-from .models import Rol
-from .models import Producto
-from .models import Direccion
-from .models import Compra
-from .models import Detalle
-from .models import Permiso
-from .models import Rol_Permiso
-from .models import Pedido
+from .models import CustomUser, Localidad, Barrio,Rol, Producto, Direccion,Compra,Detalle,Permiso,Rol_Permiso,Pedido
+
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
+from django.conf import settings
+
 
 
 class UsuarioSerializers(serializers.ModelSerializer):
@@ -24,7 +20,7 @@ class UsuarioSerializers(serializers.ModelSerializer):
 
     class Meta:
         model = get_user_model()
-        fields = ('id','email', 'password', 'username', 'first_name', 'last_name') #16/1/25)
+        fields = ('id','email', 'password', 'username', 'first_name', 'last_name') #16/1/25
 
 
 class LocalidadSerializer(serializers.ModelSerializer):
@@ -97,25 +93,39 @@ class RolSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+from rest_framework import serializers
+from .models import Producto
+
 class ProductoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Producto
-        fields = '__all__'
-
-
+        fields = ['id_producto', 'nombre_producto', 'descripcion', 'precio', 'visible']
 
 
 
 class DetalleSerializer(serializers.ModelSerializer):
+    nombre_producto = serializers.CharField(source='producto.nombre_producto', read_only=True)  # Incluye el nombre del producto
+
     class Meta:
         model = Detalle
-        fields = '__all__'
+        fields = ['id_detalle', 'cantidad', 'precio_calculado', 'producto', 'nombre_producto', 'compra']
         
 class CompraSerializer(serializers.ModelSerializer):
-    detalles = DetalleSerializer(many=True, read_only=True)
+    detalles = DetalleSerializer(many=True, read_only=True, source='detalle')
+    user_id = serializers.IntegerField(source='user.id', read_only=True)
+    user_first_name = serializers.CharField(source='user.first_name', read_only=True)
+    user_last_name = serializers.CharField(source='user.last_name', read_only=True)
     class Meta:
         model = Compra
-        fields = '__all__'        
+        fields = '__all__'       
+
+class MisComprasView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        compras = Compra.objects.filter(user=request.user)
+        serializer = CompraSerializer(compras, many=True)
+        return Response(serializer.data) 
 
 
 class PermisoSerializer(serializers.ModelSerializer):

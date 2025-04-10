@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Detalle } from '../../shared/interfaces/detalle.data';
+//import { Detalle } from '../../shared/interfaces/detalle.data';
+import { Detalle } from '../../shared/interfaces/compra';
 
 @Injectable({
   providedIn: 'root'

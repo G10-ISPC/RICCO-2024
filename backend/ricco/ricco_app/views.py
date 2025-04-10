@@ -35,6 +35,8 @@ from .models import Rol_Permiso
 from .models import Pedido
 
 from django.http import HttpResponse
+from .serializers import CompraSerializer
+from rest_framework.permissions import IsAuthenticated
 
 def bienvenida (request): #15/01/25
     message = """
@@ -133,20 +135,105 @@ class RolViewSet(viewsets.ModelViewSet):
     serializer_class= RolSerializer
  
 class ProductoViewSet(viewsets.ModelViewSet):
-    queryset=Producto.objects.all()
-    serializer_class= ProductoSerializer
+    queryset = Producto.objects.all()
+    serializer_class = ProductoSerializer
+    lookup_field = 'id_producto'
+
+    def get_serializer_context(self):
+        return {'request': self.request}  # 🔄 Pasar el contexto de la solicitud
+
  
 class DireccionViewSet(viewsets.ModelViewSet):
     queryset=Direccion.objects.all()
     serializer_class= DireccionSerializer
 
 class CompraViewSet(viewsets.ModelViewSet):
-    queryset=Compra.objects.all()
-    serializer_class= CompraSerializer                
+    queryset = Compra.objects.all()
+    serializer_class = CompraSerializer   
+    permission_classes = [IsAuthenticated]
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
+    def get_queryset(self):
+        compras = Compra.objects.select_related('user').all()
+        for compra in compras:
+            print(f'Compra ID: {compra.id}, Usuario: {compra.user.first_name} {compra.user.last_name}')
+        return compras
+
+
+class MisComprasView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        compras = Compra.objects.filter(user=request.user)
+        print(f"Usuario autenticado: {request.user}")
+        print(f"Compras del usuario: {compras}")
+
+        serializer = CompraSerializer(compras, many=True)
+        return Response(serializer.data)
+
+    def post(self, request):
+        data = request.data
+        data['user'] = request.user.id
+        serializer = CompraSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=201)
+        return Response(serializer.errors, status=400)
+    
+class TodasComprasView(APIView):
+    permission_classes = [IsAuthenticated]  # Solo usuarios autenticados pueden acceder
+
+    def get(self, request):
+        # Depurar encabezados de la solicitud
+        print("Encabezados de la solicitud:", request.headers)
+
+        # Verificar el rol del usuario
+        if not request.user.rol or request.user.rol.nombre_rol != "Administrador":
+            print(f"Acceso denegado: el rol del usuario es {request.user.rol.nombre_rol if request.user.rol else 'ninguno'}")
+            return Response(
+                {"error": "No tienes permisos para acceder a este recurso."},
+                status=403
+            )
+
+        # Obtener y serializar las compras
+        compras = Compra.objects.all()
+        print("Compras obtenidas en el backend:")
+        for compra in compras:
+            print(f"Compra ID: {compra.id_compra}, Usuario: {compra.user.email}, Total: {compra.precio_total}")  # Usando id_compra y precio_total
+
+        serializer = CompraSerializer(compras, many=True)
+        return Response(serializer.data)
+
+    def post(self, request):
+        # Depurar encabezados de la solicitud
+        print("Encabezados de la solicitud:", request.headers)
+
+        # Verificar el rol del usuario
+        if not request.user.rol or request.user.rol.nombre_rol != "Administrador":
+            print(f"Acceso denegado: el rol del usuario es {request.user.rol.nombre_rol if request.user.rol else 'ninguno'}")
+            return Response(
+                {"error": "No tienes permisos para acceder a este recurso."},
+                status=403
+            )
+
+        # Procesar la creación de una nueva compra
+        data = request.data
+        serializer = CompraSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            print("Compra creada con éxito:", serializer.data)
+            return Response(serializer.data, status=201)
+        print("Errores en la creación de la compra:", serializer.errors)
+        return Response(serializer.errors, status=400)
+
+
     
 class DetalleViewSet(viewsets.ModelViewSet):
     queryset=Detalle.objects.all()
     serializer_class= DetalleSerializer  
+    
  
 class PermisoViewSet(viewsets.ModelViewSet):
     queryset=Permiso.objects.all()

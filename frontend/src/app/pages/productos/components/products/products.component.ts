@@ -8,7 +8,7 @@ import { DecimalFormatPipe } from '../../../../shared/pipes/decimal-format.pipe'
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [ProductCardComponent, DecimalFormatPipe],
+  imports: [ProductCardComponent],
   templateUrl: './products.component.html',
   styleUrl: './products.component.css',
 })
@@ -23,9 +23,11 @@ export class ProductsComponent implements OnInit {
   ngOnInit() {
     this.productoService.obtenerCard().subscribe(
       (data: Product[]) => {
-        this.products = data.map(producto => {
-          if (!producto.id) {
-            producto.id = this.generateUniqueId(); // Genera un ID único si no tiene uno
+        this.products = data.filter(producto => producto.visible); // 🔄 Filtrar solo los productos visibles
+
+        this.products = this.products.map(producto => {
+          if (!producto.id_producto) {
+            producto.id_producto = this.generateUniqueId(); // Genera un ID único si no tiene uno
           }
           console.log('Tipo y valor de precio:', typeof producto.precio, producto.precio);
           if (typeof producto.precio !== 'number') {
@@ -35,12 +37,15 @@ export class ProductsComponent implements OnInit {
         
           return producto;
         });
+
+        console.log('Productos disponibles en la tienda:', this.products);
       },
       error => {
         console.error('Error fetching products', error);
       }
     );
   }
+
   
   generateUniqueId(): string {
     return '_' + Math.random().toString(36).substr(2, 9);

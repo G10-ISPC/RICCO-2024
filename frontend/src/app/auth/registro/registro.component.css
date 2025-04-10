@@ -1,5 +1,4 @@
 
-
 main{
     
     /* background: url("/assets/img/plato.png"); */
@@ -191,7 +190,7 @@ main{
     bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
-    background-color: #060706; /* negro para indicar éxito */
+    background-color: #060706; /* Verde para indicar éxito */
     color: #fff;
     padding: 10px 20px;
     border-radius: 5px;
@@ -208,4 +207,3 @@ main{
       opacity: 1;
     }
   }
-

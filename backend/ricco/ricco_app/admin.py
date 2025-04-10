@@ -18,7 +18,7 @@ from .models import Pedido
 class CustomUserAdmin(UserAdmin):
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
-        ('Personal info', {'fields': ('first_name', 'last_name', 'telefono', 'direccion')}),
+        ('Personal info', {'fields': ('first_name', 'last_name', 'telefono', 'direccion', 'rol')}),
         ('Permissions', {'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')}),
         ('Important dates', {'fields': ('last_login', 'date_joined')}),
     )
@@ -28,8 +28,8 @@ class CustomUserAdmin(UserAdmin):
             'fields': ('email', 'password1', 'password2'),
         }),
     )
-    list_display = ('email', 'first_name', 'last_name', 'is_staff')
-    search_fields = ('email', 'first_name', 'last_name')
+    list_display = ('email', 'first_name', 'last_name', 'is_staff', Rol)
+    search_fields = ('email', 'first_name', 'last_name', 'nombre_rol')
     ordering = ('email',)
 
 class LocalidadAdmin(admin.ModelAdmin):
@@ -60,10 +60,26 @@ class Rol_PermisoAdmin(admin.ModelAdmin):
     list_display = ('id_rol_permiso', 'permiso', 'rol')  
 
 class PedidoAdmin(admin.ModelAdmin):
-    list_display = ('id_pedido', 'fecha_pedido', 'estado')     
+    list_display = ('id_pedido', 'fecha_pedido', 'estado')
     
-    
-            
+class DetalleInline(admin.TabularInline):
+    model = Detalle
+    extra = 0
+    # Deshabilita las opciones de cambiar y eliminar detalles
+    def has_change_permission(self, request, obj=None):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+
+    def has_add_permission(self, request, obj=None):
+        return False
+
+class CompraAdmin(admin.ModelAdmin):
+    inlines = [DetalleInline]
+
+   
+        
 admin.site.register(Localidad, LocalidadAdmin )
 admin.site.register(Barrio, BarrioAdmin)
 admin.site.register(Direccion, DireccionAdmin)
