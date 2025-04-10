@@ -5,14 +5,14 @@ import { Component, OnInit } from '@angular/core';
 import { DecimalFormatPipe } from '../../../shared/pipes/decimal-format.pipe';
 import { DetalleService } from '../../../core/services/detalle.service';
 import { ReactiveFormsModule } from '@angular/forms';
-import { Detalle } from '../../../shared/interfaces/detalle.data';
-import { Compra } from '../../../shared/interfaces/compra';
+//import { Detalle } from '../../../shared/interfaces/detalle.data';
+import { Detalle,Compra } from '../../../shared/interfaces/compra';
 import { CompraService } from '../../../core/services/compra.service';
 
 @Component({
   selector: 'app-historialdecompras',
   standalone: true,
-  imports: [AsyncPipe, NgComponentOutlet, DecimalFormatPipe, CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './historialdecompras.component.html',
   styleUrls: ['./historialdecompras.component.css']
 })

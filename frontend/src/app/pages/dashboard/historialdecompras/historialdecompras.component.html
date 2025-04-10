@@ -5,7 +5,7 @@
 
 <div class="col-md-12">
     <div class="card">
-        <div class="card-header bg-primary text-white">                        
+        <div class="card-header bg-primary text-white">
             Historial de Compras
         </div>
         <div class="card-body">
@@ -19,19 +19,26 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Combinamos la información en la misma fila -->
-                    <tr *ngFor="let compra of getCompra; let i = index">
-                        <td>{{ compra.descripcion }}</td>
-                        <td>{{ getDetalle[i] ? getDetalle[i].cantidad : 'Cantidad no disponible' }}</td>
-                        <td>{{ compra.fecha || 'Fecha no disponible' }}</td>
-                        <td>{{ getDetalle[i] ? getDetalle[i].precio_calculado : 'Precio no disponible' }}</td>
-
-                    </tr>
+                    <!-- Itera sobre las compras -->
+                    <ng-container *ngFor="let compra of getCompra">
+                        <!-- Itera sobre los detalles de cada compra -->
+                        <tr *ngFor="let detalle of compra.detalles">
+                            <!-- Producto -->
+                            <td>{{ detalle.nombre_producto || 'Producto no disponible' }}</td>
+                            <!-- Cantidad -->
+                            <td>{{ detalle.cantidad }}</td>
+                            <!-- Fecha de la compra -->
+                            <td>{{ compra.fecha || 'Fecha no disponible' }}</td>
+                            <!-- Precio calculado -->
+                            <td>{{ detalle.precio_calculado }}</td>
+                        </tr>
+                    </ng-container>
                 </tbody>
-                <div *ngIf="!getDetalle || getDetalle.length === 0">
-                    <p>No hay producto disponible.</p>
-                </div>              
-            </table>                        
+                <!-- Mensaje si no hay detalles -->
+                <div *ngIf="!getCompra || getCompra.length === 0">
+                    <p>No hay compras disponibles.</p>
+                </div>
+            </table>
         </div>
     </div>
 </div>

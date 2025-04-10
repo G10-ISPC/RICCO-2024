@@ -1,30 +1,36 @@
-<!-- TEMPLATE QUE MUESTRA EL HISTORIAL DE COMPRA -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    
-
-       <div class="dashboard-container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header bg-primary text-white">                       
-                        <a routerLink="/productos" class="nav-link" target="blank">  Volver a comprar                 
-                        <!-- <img  class="cartIcon" src="../assets/img/cart1.png" > -->
-                    </a>
-                    </div>
-                <div class="card-body">                        
-                </div>            
-            </div>
-        </div>
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header bg-primary text-white">                        
-                        <a routerLink="/historialdecompras" class="nav-link"  target="blank"> Historial de Compras </a>
-                    </div>
-                    <div class="card-body">                    
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>    
-    <router-outlet></router-outlet>
+<!-- dashboard.component.html -->
+<div class="dashboard-container">
+    <nav class="sidebar">
+      <button (click)="showAdminComponent()">Productos</button>
+      <button (click)="showComprasComponent()">Compras</button>
+    </nav>
+    <main class="main-content">
+      <ng-container *ngIf="showAdmin">
+        <app-admin></app-admin>
+      </ng-container>
+      <ng-container *ngIf="showCompras">
+        <table>
+          <thead>
+            <tr>
+              <th>ID Usuario</th>
+              <th>Nombre Usuario</th>
+              <th>Descripción</th>
+              <th>Precio Total</th>
+              <th>Fecha</th>
+              <!-- Otros campos que desees mostrar -->
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let compra of compras">
+              <td>{{ compra.user_first_name }} {{ compra.user_last_name || '' }}</td>
+              <td>{{compra.descripcion}}</td>
+              <td>{{compra.precio_total}}</td>
+              <td>{{compra.fecha | date}}</td>
+              <!-- Otros campos que desees mostrar -->
+            </tr>
+          </tbody>
+        </table>
+      </ng-container>
+    </main>
+  </div>
+  

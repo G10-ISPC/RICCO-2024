@@ -13,4 +13,13 @@
   .ng-invalid:not(form).ng-touched {
     border-left: 5px solid red
   }
-  
+  .white-box {
+    background-color: white;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 150px;
+    margin: 50px auto;
+    max-width: 900px;
+    text-align: center;
+    border-radius: 8px;
+  }
