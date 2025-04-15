@@ -2,7 +2,8 @@ from django.urls import path, include
 from rest_framework import routers
 from .views import LoginView, LogoutView, RegistroView
 from ricco_app import views
-from .views import MisComprasView, TodasComprasView
+from .views import MisComprasView, TodasComprasView, AdminView
+
 
 
 router= routers.DefaultRouter()
@@ -32,6 +33,8 @@ urlpatterns = [
     path ('mis-compras/', 
           MisComprasView.as_view(), name='mis_compras'),
     path('todas-compras/', TodasComprasView.as_view(), name='todas_compras'), 
+    path('admin/', AdminView.as_view(), name='admin'), 
+    
     
     
     path('', include(router.urls)),

@@ -13,14 +13,18 @@ from django.conf import settings
 
 
 class UsuarioSerializers(serializers.ModelSerializer):
-    email = serializers.EmailField(
-        required=True)
-    password = serializers.CharField(
-        min_length=8)
+    email = serializers.EmailField(required=True)
+    password = serializers.CharField(min_length=8, write_only=True)  # 👈 importante esto
+    rol = serializers.SerializerMethodField()
 
     class Meta:
         model = get_user_model()
-        fields = ('id','email', 'password', 'username', 'first_name', 'last_name') #16/1/25
+        fields = ('id', 'email', 'password', 'username', 'first_name', 'last_name', 'rol')
+
+    def get_rol(self, obj):
+        return 'admin' if obj.is_staff else 'cliente'
+
+
 
 
 class LocalidadSerializer(serializers.ModelSerializer):
