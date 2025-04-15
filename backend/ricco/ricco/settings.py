@@ -27,7 +27,10 @@ SECRET_KEY = 'django-insecure--$1@3$_!5!^g#-o#wt#2mh91%mm0e8a5#-4)oyja*jh&6$*^4+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['127.0.0.1', 
+                 'localhost',
+                 '10.0.2.2'  # Para el emulador de Android
+                 ]
 CORS_ALLOW_ALL_ORIGINS = True
 
 
@@ -128,9 +131,9 @@ AUTH_PASSWORD_VALIDATORS = [
             'min_length': 8,
         }
     },
-    # {
-    #     'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    # },
+     {
+         'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+     },
     {
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
@@ -169,12 +172,14 @@ REST_FRAMEWORK = {
         
     ),
     'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.AllowAny',
-    ),
+    'rest_framework.permissions.IsAuthenticated',
+)
 }
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=10),
+    'ROTATE_REFRESH_TOKENS': True, #cada vez que el usuario use un refresh se le dara u token nuevo
+    'BLACKLIST_AFTER_ROTATION': True,
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
     'SIGNING_KEY': SECRET_KEY,
     'AUTH_HEADER_TYPES': ('Bearer',),
@@ -182,8 +187,9 @@ SIMPLE_JWT = {
 
 # Configuración de CORS
 CORS_ORIGIN_WHITELIST = [
-    "http://localhost:4200",  # Añade la URL de tu front-end
-
+    "http://localhost:4200",  # Frontend web
+    "http://10.0.2.2:8000",  # Emulador Android
+    "http://192.168.X.X:8000",  # IP local si pruebas con un celular físico
 ]
 CORS_ALLOW_ALL_ORIGINS= True
 CORS_ALLOW_CREDENTIALS = True

@@ -10,33 +10,19 @@ from rest_framework import viewsets
 from django.contrib.auth import get_user_model
 from rest_framework_simplejwt.tokens import RefreshToken
 
-from .serializers import UsuarioSerializers
-from .serializers import RegistroSerializers
-from .serializers import LocalidadSerializer
-from .serializers import BarrioSerializer
-from .serializers import RolSerializer
-from .serializers import ProductoSerializer
-from .serializers import DireccionSerializer 
-from .serializers import PermisoSerializer
-from .serializers import CompraSerializer
-from .serializers import DetalleSerializer
-from .serializers import Rol_PermisoSerializer
-from .serializers import PedidoSerializer
+from .serializers import UsuarioSerializers,RegistroSerializers, LocalidadSerializer,BarrioSerializer
+from .serializers import RolSerializer, ProductoSerializer, DireccionSerializer, CompraSerializer,DetalleSerializer, PedidoSerializer
+from .serializers import PermisoSerializer, Rol_PermisoSerializer
 
-from .models import Localidad
-from .models import Barrio
-from .models import Rol
-from .models import Producto
-from .models import Direccion
-from .models import Compra
-from .models import Detalle
-from .models import Permiso
-from .models import Rol_Permiso
-from .models import Pedido
+
+from .models import Localidad, Barrio,Rol, Producto,Direccion, Compra,Detalle,Pedido
+from .models import Permiso, Rol_Permiso
+
 
 from django.http import HttpResponse
 from .serializers import CompraSerializer
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAdminUser
 
 def bienvenida (request): #15/01/25
     message = """
@@ -61,11 +47,15 @@ def bienvenida (request): #15/01/25
     return HttpResponse(message)
 
 class LoginView(APIView):
-    @method_decorator(csrf_exempt)
+    #@method_decorator(csrf_exempt)
+    permission_classes=[AllowAny]
     def post(self, request):
+        print(f"Datos recibidos en la solicitud: {request.data}")
         email = request.data.get('email', None)
         password = request.data.get('password', None)
+        print(f"Intentando autenticar con email: {email}, password: {password}")
         usuario = authenticate(request, username=email, password=password)
+        print(f"Resultado de autenticate():{usuario}")
 
         if usuario:
             login(request, usuario)
@@ -73,11 +63,13 @@ class LoginView(APIView):
             tokens = self.get_tokens_for_user(usuario)
             user_data = UsuarioSerializers(usuario).data
             return Response({
-                'token': tokens['access'],
-                'refresh': tokens['refresh'],
-                'user': user_data,
-                'is_staff': isAdmin
-            }, status=status.HTTP_200_OK)
+    'token': tokens['access'],
+    'access': tokens['access'],
+    'refresh': tokens['refresh'],
+    'user': UsuarioSerializers(usuario).data
+}, status=status.HTTP_200_OK)
+
+
         else:
             return Response({'error': 'Credenciales de inicio de sesión incorrectas'}, status=status.HTTP_400_BAD_REQUEST)
 
@@ -135,12 +127,24 @@ class RolViewSet(viewsets.ModelViewSet):
     serializer_class= RolSerializer
  
 class ProductoViewSet(viewsets.ModelViewSet):
-    queryset = Producto.objects.all()
+    queryset = Producto.objects.all()  # Aquí obtenemos todos los productos
     serializer_class = ProductoSerializer
-    lookup_field = 'id_producto'
+    permission_classes = [AllowAny]  # Permitir acceso a todos
+
+    def get_queryset(self):
+        # Verificamos si el usuario está autenticado y es admin
+        user = self.request.user
+        print(f"Usuario autenticado en productos: {user} - Is staff: {getattr(user, 'is_staff', False)}")
+        if user.is_authenticated and user.is_staff:
+            # Si es admin, obtenemos todos los productos
+            return Producto.objects.all()
+        else:
+            # Si es cliente, solo los productos visibles
+            return Producto.objects.filter(visible=True)
 
     def get_serializer_context(self):
-        return {'request': self.request}  # 🔄 Pasar el contexto de la solicitud
+        return {'request': self.request}  # Pasar el contexto de la solicitud al serializer
+
 
  
 class DireccionViewSet(viewsets.ModelViewSet):
@@ -247,5 +251,9 @@ class PedidoViewSet(viewsets.ModelViewSet):
     queryset=Pedido.objects.all()
     serializer_class= PedidoSerializer  
     
-    
+class AdminView(APIView):
+    permission_classes = [IsAdminUser]  # Solo administradores pueden acceder
+
+    def get(self, request):
+        return Response({"message": "Bienvenido al panel de administración"}, status=status.HTTP_200_OK)    
           

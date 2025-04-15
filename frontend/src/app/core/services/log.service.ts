@@ -73,12 +73,15 @@ export class LogService {
     return this.http.post<LogResponse>(this.apiUrl, credentials).pipe(
       tap((response: LogResponse) => {
         const token = response.token;
-        const isAdmin = response.is_staff;
         if (token) {
           localStorage.setItem(this.TOKEN_KEY, token);
           console.log('Token guardado:', localStorage.getItem(this.TOKEN_KEY));
           this.isUserLogin$.next(true);
-          this.isAdmin$.next(isAdmin);
+  
+          // ✅ NUEVO: decodificar el token para obtener is_staff
+          const decoded = this.decodeToken(token);
+          console.log('Token decodificado en login:', decoded);
+          this.isAdmin$.next(decoded.is_staff);  // 👈 Esto ahora viene desde el token
         } else {
           throw new Error("Este usuario no existe.");
         }
@@ -86,6 +89,7 @@ export class LogService {
       catchError(this.handleError)
     );
   }
+  
 
   isUserLogin(): Observable<boolean> {
     return this.isUserLogin$.asObservable();

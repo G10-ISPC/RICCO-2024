@@ -1,5 +1,4 @@
 // registro.component.ts
-
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
@@ -12,9 +11,10 @@ import { RegistroService } from '../../core/services/registro.service';
 const letrasPattern = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ]*$/;
 const addressPattern = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ0-9\s,'-]*$/;
 const phonePattern = /^\d{10,15}$/;
-const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])[A-Za-z0-9]{8,}$/;
+const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()\-_=+{};:,<.>])[A-Za-z0-9!@#$%^&*()\-_=+{};:,<.>]{8,}$/; // Actualizado para incluir caracteres especiales
 const numberPattern = /^[0-9]*$/; // Validación de números
 
+// Validación personalizada para que las contraseñas coincidan
 export function passwordMatchValidator(password: string, confirmPassword: string): ValidatorFn {
   return (formGroup: AbstractControl): ValidationErrors | null => {
     const passwordControl = formGroup.get(password);
@@ -45,7 +45,10 @@ export class RegistroComponent {
 
   constructor(private formBuilder: FormBuilder, private router: Router, private registroService: RegistroService) {
     this.formRegister = this.formBuilder.group({
-      password: new FormControl('', [Validators.required, Validators.pattern(passwordPattern)]),
+      password: new FormControl('', [
+        Validators.required,
+        Validators.pattern(passwordPattern)
+      ]),
       password2: new FormControl('', Validators.required),
       email: new FormControl('', [Validators.required, Validators.email]),
       first_name: new FormControl('', [Validators.required, Validators.minLength(3), Validators.pattern(letrasPattern)]),
